@@ -1,0 +1,60 @@
+{% extends 'milestone2/base.html' %}
+{% load static %}
+
+{% block title %} Homepage {% endblock %}
+
+{% block table  %} 
+<section class="middle">
+    <div class="">
+        <a href="details.html" class="button-link"><button type="submit">Personal Information</button></a>
+    </div>
+    
+
+    <div class="table-container">
+        <table>
+            <h2>Welcome </h2>
+            <h1>Clients Dashboard</h1>
+            <h5>festim.osmani@gmail.com </h5>
+            <hr>
+            <h3>User Information </h3>
+            <br>
+            <thead>
+                <tr>
+                    <th>UserID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Active Account</th>
+                    <th>Last Login</th>
+                </tr>
+            </thead>
+            <tbody id="tableHeader">
+                {% for user in users %}
+                <tr>
+                    <a href="{% url 'user-data' user.id %}">
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.first_name }}</td>
+                        <td>{{ user.last_name }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{user.email}}</td>
+                        {% if user.is_active %}
+                            <td class="success">Active</td>
+                        {% else %}
+                            <td class="danger">Inactive</td>
+                        {% endif %}
+                        {% if user.last_login %}
+                            <td>{{ user.last_login|date:"F j, Y, g:i a" }}</td>
+                        {% else %}
+                            <td class="danger">Never</td>
+                        {% endif %}
+                    </a>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+     
+{% endblock %}

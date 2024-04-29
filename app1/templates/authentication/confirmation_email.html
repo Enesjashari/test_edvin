@@ -1,0 +1,35 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Confirmation</title>
+</head>
+<body>
+    <h2>Confirm Your Email</h2>
+    <p>Hello {{ user.username }},</p>
+    <p>Please click the following link to confirm your email address:</p>
+    <p><a href="{{ domain }}{{ confirm_url }}">Confirm Email</a></p>
+    <p>If you did not register for an account, you can ignore this email.</p>
+</body>
+</html> -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Confirmation</title>
+</head>
+<body style="margin: 0; font-family: 'Poppins', sans-serif; background: #ffffff; font-size: 14px;">
+<h2 style="margin-top: 0; padding-top: 20px; text-align: center;">Confirm Your Email</h2>
+<p style="text-align: center;">Hi {{ user.username }},</p>
+<p style="text-align: center;">Please click the following link to confirm your email address:</p>
+<p style="text-align: center;"><a href="http://{{ domain }}{{ confirm_url }}" style="color: #007bff; text-decoration: none;">Confirm Email</a></p>
+
+<p style="text-align: center;">If you did not register for an account, you can ignore this email.</p>
+
+</body>
+</html>

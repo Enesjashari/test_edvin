@@ -1,0 +1,162 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>sign in</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    min-height: 100vh;
+    background: rgb(255, 255, 255);
+    margin-left: 0px;
+    width: 100%;
+}
+img{
+    width: 915px;
+    height: 100px;
+    display: flex;
+    justify-content: right;
+    margin-right: -5000px;
+    margin-left: 100px;
+    min-height: 100vh;
+}
+.container{
+    width: 420px;
+    background: transparent;
+    color: black;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+.row h1{
+    font-size: 36px;
+    text-align: center;
+}
+
+.row .input-box{
+    width: 100%;
+    height: 50px;
+    margin: 50px 0;
+}
+
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-color: #333;
+    border-radius: 40px;
+    font-size: 16px;
+    color: black;
+    padding: 15px;
+
+}
+
+.input-box input::placeholder{
+    color: black;
+
+}
+.row .forgot{
+    display: flex;
+    margin-bottom: 50px;
+    margin-left: 200px;
+    font-size: 14px;
+}
+.row a{
+    color: black;
+    text-decoration: none;
+}
+.forgot a:hover{
+    text-decoration: underline;
+}
+
+.row .agree {
+    display: flex;
+    font-size: 14.5px;
+    margin: -15px 0 15px;
+}
+.agree label input{
+    accent-color: black;
+    margin-right: 3px;
+}
+
+.agree a{
+    color: black;
+    text-decoration: none;
+}
+
+.agree a:hover{
+    text-decoration: underline;
+}
+
+.row .btn{
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+}
+
+
+    </style>
+    
+
+</head>
+
+<body>
+    <section class="vh-100 shadow" style="background-color: rgb(189, 223, 235);">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <h1>Log in</h1>
+                    <div class="input-box">
+                        <input type="text" id="username" name="username" placeholder="username" required>
+                    </div>
+                    <div class="input-box">
+                        <input type="password" id="password" name="password" placeholder="password" required>
+                        <div class="forgot">
+                            <a href="{% url 'forgotmypassword' %}">Forgot password?</a>
+                        </div>
+                    </div>
+                    
+                    <div class="agree">
+                        <label><input type="checkbox" required>I agree all statments in </label>&nbsp;
+                        
+                        <a href="#">Terms of Service</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                    <a href="{% url 'register' %}"><h6>I don't have an account!</h6></a>
+                </form>
+            </div>
+        </div>
+    </section>
+    <div class="photo">
+        <img src="{% static 'assets/img/bg.jpg' %}">
+    </div>
+
+</body>
+</html>

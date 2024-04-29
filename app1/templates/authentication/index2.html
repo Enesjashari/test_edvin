@@ -1,0 +1,60 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+
+{% block title %} Homepage {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="main p-3">
+        <div class="text-center">
+            {% if user.is_authenticated %}
+            <!-- <h1>Welcome, {{user.username}}</h1> -->
+            <h1>Welcome,  {{ logged_in_user.username }} </h1>
+            
+            <h2>Clients Dashboard:</h2>
+            {{ logged_in_user.email }}
+            <!-- {{ logged_in_user.id }} -->
+            <!-- <a href="{% url 'update_info' %}">
+                <button class="btn btn-primary">Update Info</button>
+            </a> -->
+            {% else %}
+            <h1>Welcome</h1>
+            {% endif %}
+            <hr>
+        </div>
+        {% if logged_in_user.username == 'django' %}
+        <div class="container">
+            <h3>User Information</h3>
+            <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Last Login</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% if user.last_login %}
+                                {{ user.last_login|date:"F j, Y, g:i a" }}
+                                {% else %}
+                                Never
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

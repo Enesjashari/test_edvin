@@ -1,0 +1,345 @@
+
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Front End Testim</title>
+        <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+        <nav>
+            <div class="container">
+                <h1>Logo</h1>
+                <div class="links">
+                    <a href="index.html">Home</a>
+                    <a href="#">About Us</a>
+                    <a href="#">Login</a>
+                </div>
+             
+                <div class="profile-area">
+                    <div class="theme-btn">
+                        <span class="material-icons active">light_mode</span>
+                            <span class="material-icons">
+                                dark_mode
+                                </span>
+                    </div>
+                    <div class="profile">
+                        <div class="profile-photo">
+                            <img src="{% static './images/f.png' %}" alt="Profile Photo">
+                        </div>
+                        <h5>Super User</h5>
+                        <span class="material-icons">
+                            expand_more
+                            </span>
+                    </div>
+                    <button id="menu-btn">
+                        <span class="material-icons">menu</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+        <!-- END OF NAVBAR -->
+        <main>
+            <aside>
+<button id="close-btn">
+    <span class="material-icons">close</span>
+</button>
+<div class="sidebar">
+    <div class="search-bar">
+        <input type="search" placeholder="Search">
+        <button type="button">
+            <span class="material-icons">search</span>
+        </button>
+    </div>
+    <br>
+    <a href="#" class="active">
+        <span class="material-icons">dashboard</span>
+        <h4>Dashboard</h4>
+    </a>
+    <a href="#">
+        <span class="material-icons">currency_exchange</span>
+        <h4>Exchange</h4>
+    </a>
+    <a href="#">
+        <span class="material-icons">account_balance_wallet</span>
+        <h4>Wallet</h4>
+    </a>
+    <a href="#">
+        <span class="material-icons">payment</span>
+        <h4>Transactions</h4>
+    </a>
+    <a href="#">
+        <span class="material-icons">pie_chart</span>
+        <h4>Analytics</h4>
+    </a>
+    <a href="#">
+        <span class="material-icons">chat</span>
+        <h4>Messages</h4>
+    </a>
+    <a href="#">
+        <span class="material-icons">help_center</span>
+        <h4>Help Center</h4>
+    </a>
+    <a href="#">
+        <span class="material-icons">settings</span>
+        <h4>Settings</h4>
+    </a>
+    <br>
+    <div class="sidebar-footer">
+        <div class="profile">
+            <div class="profile-photo">
+                <img src="{% static './images/f.png' %}" alt="Profile Photo">
+            </div>
+            <h5>Super User</h5>
+           
+            
+        </div>
+</div>
+
+
+    </aside>
+            <!-- END OF ASIDE -->
+            <section class="middle">
+                <div class="">
+                    <a href="Index.html" class="button-link"><button type="submit">Go Back</button></a>
+                </div>
+                
+                <div class="table-container">
+                    <form class="detailsinputs">
+                        
+                        <h1 class="personal-info-header">Personal Information</h1>
+
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Prefix:</label>
+                            <input type="text" id="text" name="Prefix" value="Option 2">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Sufix:</label>
+                            <input type="text" id="text" name="Sufix" value="Option 1">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Social Security Number</label>
+                            <input type="text" id="text" name="Social Security Number" value="123456781">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Preferred phone type:</label>
+                            <input type="text" id="text" name="Preferred phone type:" value="Option 2">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="number">Number:</label>
+                            <input type="number" id="number" name="Number" value="1234567897">
+                            </div>
+                            <div class="input-container">
+                                <label for="number">Other Phone:</label>
+                                <input type="number" id="number" name="Number" value="1234567897">
+                                </div>
+                          
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Adress:</label>
+                            <input type="text" id="text" name="Adress" value="Emshir">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">City:</label>
+                            <input type="text" id="text" name="City" value="Fushe Kosove">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">State/Province:</label>
+                            <input type="text" id="text" name="State/Province" value="New York">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Zip Code:</label>
+                            <input type="text" id="text" name="Zip Code" value="12344">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Country:</label>
+                            <input type="text" id="text" name="Country" value="Florida">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Mail Address:</label>
+                            <input type="text" id="text" name="Mail Address" value="asd">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Mail City:</label>
+                            <input type="text" id="text" name="Mail City" value="Queen">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Mailing state province:</label>
+                            <input type="text" id="text" name="Mailing state province" value="Rhode Island">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Mailing Zip Code:</label>
+                            <input type="text" id="text" name="Mailing Zip Code" value="52400">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Mailing Country:</label>
+                            <input type="text" id="text" name="Mailing Country" value="asd">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Birth City:</label>
+                            <input type="text" id="text" name="Birth City" value="New York">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Birth Country:</label>
+                            <input type="text" id="text" name="Birth Country" value="asd">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Birth/State Province:</label>
+                            <input type="text" id="text" name="Birth/State Province" value="Kentucky">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Languages Spoken Other Than English:</label>
+                            <input type="text" id="text" name="Languages Spoken Other Than English" value="Albanian">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Emergency Contact Name:</label>
+                            <input type="text" id="text" name="Emergency Contact Name" value="Agron">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Emergency Contact Number:</label>
+                            <input type="text" id="text" name="Emergency Contact Number" value="565468468468">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">Emergency Contact Email:</label>
+                            <input type="text" id="text" name="Emergency Contact Email" value="jhgadjybwd@gmail.com">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Primary Speciality:</label>
+                            <input type="text" id="text" name="Primary Speciality" value="Yes">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-container">
+                            <label for="text">General Surgery:</label>
+                            <input type="text" id="text" name="General Surgery" value="Yepp">
+                            </div>
+                            <div class="input-container">
+                            <label for="text">Secondary Speciality:</label>
+                            <input type="text" id="text" name="Secondary Speciality" value="Not right now">
+                            </div>
+                        </div>
+                        <br>
+                        <!-- Add more form rows for additional input fields -->
+                        <div class="form-row">
+                            <button type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+                
+    </div>
+    <div class="table-container">
+        <form>
+            
+            <h1 class="personal-info-header">Education</h1>
+
+            <div class="form-row">
+                <div class="input-container">
+                <label for="username">Green Tech:</label>
+                <input type="text" id="username" name="username" value="Option 2">
+                </div>
+                <div class="input-container">
+                <label for="email">Country:</label>
+                <input type="email" id="email" name="email" value="Texas">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                <label for="firstName">Degreeaw</label>
+                <input type="text" id="firstName" name="firstName" value="Option 1">
+                </div>
+                <div class="input-container">
+                <label for="lastName">Phone:</label>
+                <input type="text" id="lastName" name="lastName" value=" 655488915">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                <label for="address">Degree:</label>
+                <input type="text" id="address" name="address" value="Option 1">
+                </div>
+                <div class="input-container">
+                <label for="city">Start Date:</label>
+                <input type="datetime" id="city" name="city" value="04/09/2024">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                <label for="zip">Adress:</label>
+                <input type="text" id="zip" name="zip" value="New York">
+                </div>
+                <div class="input-container">
+                <label for="country">End Date:</label>
+                <input type="datetime" id="country" name="country" value="04/05/2024">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                <label for="zip">City:</label>
+                <input type="text" id="zip" name="zip" value="Queens">
+                </div>
+                <div class="input-container">
+                <label for="country">Graduated:</label>
+                <input type="text" id="country" name="country" value="Option 1">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="country">Zip Code:</label>
+                    <input type="text" id="country" name="country" value="54300">
+                    </div>
+                <div class="input-container">
+                    <label for="country">Date:</label>
+                    <input type="text" id="country" name="country" value="04/25/2024">
+                    </div>
+            </div>
+           
+            <br>
+            <!-- Add more form rows for additional input fields -->
+            <div class="form-row">
+                <button type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+    
+</div>
+            </section>
+            <!-- END OF MIDDLE -->
+           
+              <!-- END OF RIGHT -->
+        </main>
+         <!-- END OF ASIDE -->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script src="{% static 'assets/js/main1.js' %}"></script>
+ </body>
+</html>

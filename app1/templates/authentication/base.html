@@ -1,0 +1,226 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} My Website {% endblock %}</title>
+    
+    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'assets/css/dashboard.css' %}">
+    <style>
+        .custom-bg-gradient {
+            background:  rgb(255, 0, 0); /* Adjust colors as needed */
+            color: black;
+            opacity: 45%;
+        }
+           /* CSS for dropdown */
+           #sugjerime {
+            display: none;
+            position: absolute;
+            width: calc(100% - 2px);
+            border: 1px solid #ccc;
+            background-color: #fff;
+            z-index: 1000;
+            padding: 0;
+        }
+        #sugjerime li {
+            list-style: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+        #sugjerime li:hover {
+            background-color: #f0f0f0;
+        }
+        .title {
+            padding: 20px;
+            background: #384b94c9;
+            font-size: 20px;
+            color: #f5f5f5;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="nav nav-sm justify-content-end  " >
+        <li class="nav-item  btn-sm p-3 mx-0 rounded-1">Home</li>
+        <li class="nav-item  btn-sm p-3 mx-0 rounded-1">About Us</li>
+        <li class="nav-item  btn-sm p-3 mx-0 rounded-1">Contact </li>
+        <li class="nav-item  btn-sm p-3 mx-0 rounded-1">DropDown</li>
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}"> <li class="nav-item  p-3 mx-0 rounded-1">Logout</li> </a>
+        
+        {% else %}
+        <a href="{% url 'login' %}"> <li class="nav-item  p-3 mx-0 rounded-1">Log in/Sign Up</li> </a>
+        {% endif %}
+    </ul>
+    <div class="wrapper  ">
+        <aside id="sidebar"  >
+            <div class="d-flex">
+                <button class="toggle-btn" type="button">
+                    <i class="lni lni-spinner-solid"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <a href="#">loge</a>
+                </div>
+            </div>
+            <ul class="sidebar-nav">
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="lni lni-grid-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                        <i class="lni lni-user"></i>
+                        <span>Profile</span>
+                    </a>
+                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item ">
+                            <a href="{% url 'update_info' %}" class="sidebar-link  " >Personal Info</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{% url 'update-edu' %}" class="sidebar-link">Education</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Medical Training</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Board Certifications</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Life Support/Other Certifications</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Licences</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Licences/Other Exams</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Work History</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Military Service</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Gaps in History</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Hospital Affiliation</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Professional Liability</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Actions and Sanctions</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Health Status</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Professional References</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Supplemental Claims</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Substitute Form W-9</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Background Check</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Clinical Capabilities</a>
+                        </li>
+                    </ul>
+                </li>
+               
+                
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
+                        <i class="lni lni-agenda"></i>
+                        <span>Timekeeping</span>
+                    </a>
+                    <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 1</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 2</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 3</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 4</a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#multi-one" aria-expanded="false" aria-controls="multi-one">
+                        <i class="lni lni-package"></i>
+                        <span>Banking</span>
+                    </a>
+                    <ul id="multi-one" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 1</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 2</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 3</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 4</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
+                        <i class="lni lni-stats-up"></i>
+                        <span>Reporting</span>
+                    </a>
+                    <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 1</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 2</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 3</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">Link 4</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </aside>
+
+        {% block content %}{% endblock %}
+
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+</body>
+
+</html>

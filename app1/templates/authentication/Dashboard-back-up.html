@@ -1,0 +1,40 @@
+
+{% if logged_in_user.username == 'django' %}
+<ul class="btn-group-vertical">
+    {% for user in users %}
+    <li class="btn btn-info text-dark" >{{user.id}}</li>
+    {% endfor %}
+</ul>
+<ul class="btn-group-vertical">
+    {% for user in users %}
+    <li class="btn btn-info text-dark" >{{user.username}}</li>
+    {% endfor %}
+</ul>
+<ul class="btn-group-vertical">
+    {% for user in users %}
+    <li class="btn btn-info text-dark" >{{user.email}}</li>
+    {% endfor %}
+</ul>
+<ul class="btn-group-vertical">
+    {% for user in users %}
+    {% if user.last_login %}
+    <li class="btn btn-info text-dark" >    Last Login: {{ user.last_login|date:"F j, Y, g:i a" }}</li>
+    {% else %}
+    <li class="btn btn-info text-dark" >    Last Login: Never</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endif %}
+
+
+
+
+
+def index(request):
+    logged_in_user = request.user
+    users = User.objects.all()[1:]
+    context = {
+        "logged_in_user": logged_in_user,
+        "users":users,
+    }
+    return render(request, "authentication/index.html", context)

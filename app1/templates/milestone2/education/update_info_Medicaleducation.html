@@ -1,0 +1,211 @@
+
+{% extends 'authentication/base.html' %}
+{% load static %}
+<!-- Include Bootstrap CSS -->
+{% block title %} Medical Education Form {% endblock %}
+{% block navbar %}
+
+{% endblock %}
+
+{% block content %}   
+
+<div class="container">
+    <!-- Left Column -->
+    <div class="">
+        <div class="">
+            <form method="post" action="{% url 'update_data_Medicaleducation' %}">
+                {% csrf_token %}
+                {% if users.email %}
+            
+                {% endif %}
+            
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            {% if message.tags == "error" %}
+                                <li class="alert alert-danger">{{ message }}</li>
+                            {% else %}
+                                <li class="alert alert-success">{{ message }}</li>
+                            {% endif %}    
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                
+                <div class="row">
+                    <div style="width: 90%; margin-left: 0;" class="card-header rounded bg-primary text-white mx-5 py-2">
+                        <h5 class="mb-0 text-center ">
+                            <i class="lni lni-user"></i>
+                            Medical Education 
+                        </h5>
+                    </div>
+                  
+                </div>
+                <br><br>
+                <div class="container">
+                    <div class="row">
+                        <!-- Anëja e parë e formës -->
+                        <div class="col-md-5 mx-5">
+                        <form>
+                        <div class="form-group">
+                            <label for="institution">Institution:</label>
+                            <input type="text" class="form-control" id="institution" name="institution" value="{{ user_info.institution }}">
+                        </div>
+                    
+            
+                    
+                        <div class="form-group">
+                            <label for="degreeaw">Degreeaw:</label>
+                            <select class="form-control" id="degreeaw" name="degreeaw">
+                                {% for value, label in DEGREE_CHOICES %}
+                                <option value="{{user_info.degreeaw}}" selected>{{user_info.degreeaw}}</option>
+                                {% for v in label %}
+                                <option value="{{ v.1 }}">
+                                    {{ v.1 }}
+                                </option>
+                                {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        
+            
+                        
+                        <div class="form-group">
+                            <label for="degree">Degree:</label>
+                            <select class="form-control" id="degree" name="degree">
+                                {% for value, label in DEGREE_CHOICES %}
+                                <option value="{{user_info.degree}}" selected>{{user_info.degree}}</option>
+                                {% for v in label %}
+                                <option value="{{ v.1 }}">
+                                    {{ v.1 }}
+                                </option>
+                                {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                       
+                        
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="address">Address:</label>
+                                <input type="text" class="form-control" id="address" name="address" value="{{ user_info.address }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City:</label>
+                                <input type="text" class="form-control" id="city" name="city" value="{{ user_info.city }}">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State:</label>
+                                <select class="form-control" id="state" name="state">
+                                    <option value="{{users_info.state }}" selected>{{ user_info.state }}</option>
+                                    {% for state in STATES %}
+                                        <option value="{{ state.0 }}">{{ state.1 }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="zip">Zip Code:</label>
+                                <input type="text" class="form-control" id="zip" name="zip" value="{{ user_info.zip }}">
+                            </div>
+                    </div>
+                </div>
+                    <div class="col-md-5 mx-5">   
+                        
+                    <div class="form-group">
+                        <label for="country">Country:</label>
+                        <select class="form-control" id="country" name="country">
+                            {% for value, label in COUNTRY_CHOICES %}
+                            <option value="{{user_info.country}}" selected>{{user_info.country}}</option>
+                            {% for v in label %}
+                            <option value="{{ v.1 }}">
+                                {{ v.1 }}
+                            </option>
+                            {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone:</label>
+                        <input type="text" class="form-control" id="phone" name="phone" value="{{ user_info.phone }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="start">Start Date:</label>
+                        {% if user_info.start %}
+                            <input type="date" class="form-control" id="start" name="start" value="{{ user_info.start|date:'Y-m-d' }}">
+                        {% else %}
+                            <input type="date" class="form-control" id="start" name="start" value="">
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="end">End Date:</label>
+                        {% if user_info.end %}
+                            <input type="date" class="form-control" id="end" name="end" value="{{ user_info.end|date:'Y-m-d' }}">
+                        {% else %}
+                            <input type="date" class="form-control" id="end" name="end" value="">
+                        {% endif %}
+                    </div>
+            
+            
+                    <div class="form-group">
+                        <label for="graduated">Graduated:</label>
+                        <select class="form-control" id="graduated" name="graduated">
+                            {% for value, label in DEGREE_CHOICES %}
+                            <option value="{{user_info.graduated}}" selected>{{user_info.graduated}}</option>
+                            {% for v in label %}
+                            <option value="{{ v.1 }}">
+                                {{ v.1 }}
+                            </option>
+                            {% endfor %}
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Date of Graduation:</label>
+                        {% if user_info.date %}
+                            <input type="date" class="form-control" id="date" name="date" value="{{ user_info.date|date:'Y-m-d' }}">
+                        {% else %}
+                            <input type="date" class="form-control" id="date" name="date" value="">
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Shto fushat e tjera në këtë anë sipas nevojës -->
+                  
+                            
+                            <button type="submit" class="btn btn-primary mt-4">Submit Form</button>
+                            
+
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <br><br><br><br><br><br><br><br>
+            <p style="padding-left:48%;"><a href="{% url 'update_info' %}" class="btn btn-primary btn-block">Back</a></p>
+
+<br><br><br>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

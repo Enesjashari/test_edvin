@@ -1,0 +1,607 @@
+{% extends 'authentication/base.html' %}
+{% load static %}
+<!-- Include Bootstrap CSS -->
+{% block title %} Homepage {% endblock %}
+{% block navbar %}
+
+{% endblock %}
+
+{% block content %}    
+<div class="container">
+        <!-- Left Column -->
+        <div class="">
+            <div class="">
+                <form method="post" action="{% url 'update_data' %}">
+                    {% csrf_token %}
+                    {% if user.email %}
+
+                    {% endif %}
+                <!-- template.html -->
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        {% if message.tags == "error" %}
+                            <li class="alert alert-danger" >{{ message }}</li>
+                            {% else %}
+                            <li class="alert alert-success" >{{ message }}</li>
+                        {% endif %}    
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                    <div class="row">
+                        <div style="width: 90%; margin-left: 0;" class="card-header rounded bg-primary text-white mx-5 py-2">
+                            <h5 class="mb-0   text-center ">
+                                <i class="lni lni-user   "></i>
+                                Personal Information</h5>
+                        </div>
+
+                    <div>
+                        <h1></h1>
+                    <hr>
+                    </div>
+                    <div class="col-md-5 mx-5">
+                        <div class="form-group">
+                            <label for="prefix">Prefix:</label>
+                            <select class="form-control" id="prefix" name="prefix">
+                                <option value="{{user_info.preffix}}" selected>{{user_info.preffix}}</option>
+                                <option value="Option 1">Option 1</option>
+                                <option value="Option 2">Option 2</option>
+                                <option value="Option 3">Option 3</option>
+                            </select>
+                        </div>
+                        </div>
+                        
+   
+                        <div class="col-md-5 mx-5">
+                        <div class="form-group">
+                            <label for="sufix">Sufix:</label>
+                            <select class="form-control" id="sufix" name="sufix">
+                                <option value="{{user_info.suffix}}" selected>{{user_info.suffix}}</option>
+                                <option value="Option 1">Option 1</option>
+                                <option value="Option 2">Option 2</option>
+                                <option value="Option 3">Option 3</option>
+                            </select>
+                        </div>
+                        </div>
+                        
+                        {% if user_info.socialsecuritynumber == "" %}
+                        <div class="col-md-5 mx-5">
+                        <div class="form-group">
+                            <span id="ssn-min" style="color: red; display: none;">The minimum length is 9 numbers.</span>
+                            <span id="ssn-max" style="color: red; display: none;">The maximum length is 9 numbers.</span>
+                            <span id="success-ssn" style="color: green; display: none;">Success,The number is valid.</span>
+                            <label for="input3">Social Security Number:</label>
+                            <input type="text"  minlength="9" maxlength="9"   class="form-control  " id="socialsecuritynumber" name="socialsecuritynumber" value="{{user_info.socialsecuritynumber}}" placeholder="{{user_info.socialsecuritynumber}}">
+                        </div>
+                        </div>
+                        {% else %}
+                        <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <span id="ssn-min" style="color: red; display: none;">The minimum length is 9 numbers.</span>
+                                <span id="ssn-max" style="color: red; display: none;">The maximum length is 9 numbers.</span>
+                                <span id="success-ssn" style="color: green; display: none;">Success,The number is valid.</span>
+                                <label for="input3">Social Security Number:</label>
+                                <input type="text" minlength="9" maxlength="9" class="form-control" id="socialsecuritynumber"  name="socialsecuritynumber" value="{{user_info.socialsecuritynumber}}" placeholder="{{user_info.socialsecuritynumber}}">
+
+                            </div>
+                            </div>
+                        {% endif %}
+                        
+                        
+                        
+                        <div class="col-md-5 mx-5">
+                        <div class="form-group">
+                            <label for="preferredphonetype">Preferred phone type:</label>
+                            <select class="form-control" id="preferredphonetype" name="preferredphonetype">
+                                <option value="{{user_info.preferredphonetype}}" selected>{{user_info.preferredphonetype}}</option>
+                                <option value="Option 1">Option 1</option>
+                                <option value="Option 2">Option 2</option>
+                                <option value="Option 3">Option 3</option>
+                                </select>
+                            </div>
+                            </div>
+                            
+                            {% if user_info.phone == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <span id="n-min" style="color: red; display: none;">The minimum length is 10 numbers.</span>
+                                <span id="n-max" style="color: red; display: none;">The maximum length is 10 numbers.</span>
+                                <span id="success-n" style="color: green; display: none;">Success,The number is valid.</span>
+                                <label for="phone">Number:</label>
+                                <input type="text" minlength="10" maxlength="10" class="form-control  " id="phone" name="phone"  placeholder="{{user_info.phone}}" >
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <span id="n-min" style="color: red; display: none;">The minimum length is 10 numbers.</span>
+                                <span id="n-max" style="color: red; display: none;">The maximum length is 10 numbers.</span>
+                                <span id="success-n" style="color: green; display: none;">Success,The number is valid.</span>
+                                <label for="phone">Number:</label>
+                                <input type="text" minlength="10" maxlength="10" class="form-control" id="phone" name="phone" value="{{user_info.phone}}" placeholder="{{user_info.phone}}">
+                            </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if user_info.otherphone == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <label for="phone">Other Phone:</label>
+                                <input type="text" class="form-control" id="otherphone  " name="otherphone" value="{{user_info.otherphone}}" placeholder="{{user_info.otherphone}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                                <div class="form-group">
+                                    <label for="phone">Other Phone:</label>
+                                    <input type="text" class="form-control" id="otherphone" name="otherphone" value="{{user_info.otherphone}}" placeholder="{{user_info.otherphone}}">
+                                </div>
+                                </div>
+                            {% endif %}
+
+                            {% if user_info.address == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <label for="phone">Address:</label>
+                                <input type="text" class="form-control  " id="address" name="address" value="{{user_info.address}}" placeholder="{{user_info.address}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                                <div class="form-group">
+                                    <label for="phone">Address:</label>
+                                    <input type="text" class="form-control" id="address" name="address" value="{{user_info.address}}" placeholder="{{user_info.address}}">
+                                </div>
+                                </div>
+                            {% endif %}
+
+                            {% if user_info.city == "" %}                            
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <label for="phone">City:</label>
+                                <input type="text" class="form-control  " id="city" name="city" value="{{user_info.city}}" placeholder="{{user_info.city}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                                <div class="form-group">
+                                    <label for="phone">City:</label>
+                                    <input type="text" class="form-control" id="city" name="city" value="{{user_info.city}}" placeholder="{{user_info.city}}">
+                                </div>
+                                </div>
+                            {% endif %}
+
+                            <!-- update_info.html -->
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <label for="stateprovince">State/Province:</label>
+                                <select class="form-control" id="stateprovince" name="stateprovince">
+                                    {% for value, label in COUNTRY_CHOICES %}
+                                    <option value="{{user_info.stateprovince}}" selected>{{user_info.stateprovince}}</option>
+                                    {% for v in label %}
+                                    <option value="{{ v.1 }}">
+                                        {{ v.1 }}
+                                    </option>
+                                    {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            </div>
+                            
+                            {% if user_info.zipcode == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <span id="zip-min" style="color: red; display: none;">The minimum length is 5 numbers.</span>
+                                <span id="zip-max" style="color: red; display: none;">The maximum length is 5 numbers.</span>
+                                <span id="success-zip" style="color: green; display: none;">Success,The number is valid.</span>
+                                <label for="phone">Zip code:</label>
+                                <input type="text" minlength="5" maxlength="5" class="form-control  " id="zipcode" name="zipcode" value="{{user_info.zipcode}}" placeholder="{{user_info.zipcode}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <span id="zip-min" style="color: red; display: none;">The minimum length is 5 numbers.</span>
+                                <span id="zip-max" style="color: red; display: none;">The maximum length is 5 numbers.</span>
+                                <span id="success-zip" style="color: green; display: none;">Success,The number is valid.</span>
+                                <label for="phone">Zip code:</label>
+                                <input type="text" minlength="5" maxlength="5" class="form-control" id="zipcode" name="zipcode" value="{{user_info.zipcode}}" placeholder="{{user_info.zipcode}}">
+                            </div>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <label for="stateprovince">Country:</label>
+                                <select class="form-control" id="country" name="country">
+                                    {% for value, label in COUNTRY_CHOICES %}
+                                    <option value="{{user_info.country}}" selected>{{user_info.country}}</option>
+                                    {% for v in label %}
+                                    <option value="{{ v.1 }}">
+                                        {{ v.1 }}
+                                    </option>
+                                    {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            </div>
+                            {% if user_info.mailaddress == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <label for="phone-horizontal">Mail Address:</label>
+                                <input type="text" class="form-control  " id="mailaddress" name="mailaddress" value="{{user_info.mailaddress}}" placeholder="{{user_info.mailaddress}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group">
+                                <label for="phone-horizontal">Mail Address:</label>
+                                <input type="text" class="form-control" id="mailaddress" name="mailaddress" value="{{user_info.mailaddress}}" placeholder="{{user_info.mailaddress}}">
+                            </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if user_info.mailcity == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Mail City:</label>
+                                <input type="text" class="form-control     " id="mailcity" name="mailcity" value="{{user_info.mailcity}}" placeholder="{{user_info.mailcity}}">
+                            </div>
+                            </div>
+                             {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Mail City:</label>
+                                <input type="text" class="form-control" id="mailcity" name="mailcity" value="{{user_info.mailcity}}" placeholder="{{user_info.mailcity}}">
+                            </div>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="stateprovince">Mailing state province:</label>
+                                <select class="form-control" id="mailingstateprovince" name="mailingstateprovince">
+                                    {% for value, label in COUNTRY_CHOICES %}
+                                    <option value="{{user_info.mailingstateprovince}}" selected>{{user_info.mailingstateprovince}}</option>
+                                    {% for v in label %}
+                                    <option value="{{ v.1 }}">
+                                        {{ v.1 }}
+                                    </option>
+                                    {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            </div>
+                            
+                            {% if user_info.mailingzipcode == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Mailing Zip Code:</label>
+                                <input type="text" class="form-control    " id="mailingzipcode" name="mailingzipcode" value="{{user_info.mailingzipcode}}" placeholder="{{user_info.mailingzipcode}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Mailing Zip Code:</label>
+                                <input type="text" class="form-control" id="mailingzipcode" name="mailingzipcode" value="{{user_info.mailingzipcode}}" placeholder="{{user_info.mailingzipcode}}">
+                            </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if user_info.mailingcountry == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Mailing Country:</label>
+                                <input type="text" class="form-control  " id="mailingcountry" name="mailingcountry" value="{{user_info.mailingcountry}}" placeholder="{{user_info.mailingcountry}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Mailing Country:</label>
+                                <input type="text" class="form-control" id="mailingcountry" name="mailingcountry" value="{{user_info.mailingcountry}}" placeholder="{{user_info.mailingcountry}}">
+                            </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if user_info.birthcity == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Birth City:</label>
+                                <input type="text" class="form-control  " id="birthcity" name="birthcity" value="{{user_info.birthcity}}" placeholder="{{user_info.birthcity}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Birth City:</label>
+                                <input type="text" class="form-control" id="birthcity" name="birthcity" value="{{user_info.birthcity}}" placeholder="{{user_info.birthcity}}">
+                            </div>
+                            </div>
+                            {% endif %}
+
+                            {% if user_info.birthcountry == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Birth Country:</label>
+                                <input type="text" class="form-control  " id="birthcountry" name="birthcountry" value="{{user_info.birthcountry}}" placeholder="{{user_info.birthcountry}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Birth Country:</label>
+                                <input type="text" class="form-control " id="birthcountry" name="birthcountry" value="{{user_info.birthcountry}}" placeholder="{{user_info.birthcountry}}">
+                            </div>
+                            </div>
+                            {% endif %}
+                            
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="stateprovince">Birth/State Province:</label>
+                                <select class="form-control" id="birthstateprovince" name="birthstateprovince">
+                                    {% for value, label in COUNTRY_CHOICES %}
+                                    <option value="{{user_info.birthstateprovince}}" selected>{{user_info.birthstateprovince}}</option>
+                                    {% for v in label %}
+                                    <option value="{{ v.1 }}">
+                                        {{ v.1 }}
+                                    </option>
+                                    {% endfor %}
+                                    {% endfor %}
+                                </select>
+                            </div> 
+                            </div> 
+                            
+                            {% if user_info.languagesspokenotherthanenglish == "" %}
+                                <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Languages Spoken Other Than English:</label>
+                                <input type="text" class="form-control  " id="languagesspokenotherthanenglish" name="languagesspokenotherthanenglish" value="{{user_info.languagesspokenotherthanenglish}}" placeholder="{{user_info.languagesspokenotherthanenglish}}">
+                            </div>
+                            </div>
+                            {% else %}
+                                <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Languages Spoken Other Than English:</label>
+                                <input type="text" class="form-control" id="languagesspokenotherthanenglish" name="languagesspokenotherthanenglish" value="{{user_info.languagesspokenotherthanenglish}}" placeholder="{{user_info.languagesspokenotherthanenglish}}">
+                            </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if user_info.emergencycontactname == "" %}
+                                <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Emergency Contact Name:</label>
+                                <input type="text" class="form-control  " id="emergencycontactname" name="emergencycontactname" value="{{user_info.emergencycontactname}}" placeholder="{{user_info.emergencycontactname}}">
+                            </div>
+                            </div>
+                            {% else %}
+                                <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Emergency Contact Name:</label>
+                                <input type="text" class="form-control" id="emergencycontactname" name="emergencycontactname" value="{{user_info.emergencycontactname}}" placeholder="{{user_info.emergencycontactname}}">
+                            </div>
+                            </div>
+                            {% endif %}
+
+                            {% if user_info.emergencycontactnumber == "" %}
+                                <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Emergency Contact Number:</label>
+                                <input type="text" class="form-control  " id="emergencycontactnumber" name="emergencycontactnumber" value="{{user_info.emergencycontactnumber}}" placeholder="{{user_info.emergencycontactnumber}}">
+                            </div>
+                            </div>
+                            {% else %}
+                                <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Emergency Contact Number:</label>
+                                <input type="text" class="form-control" id="emergencycontactnumber" name="emergencycontactnumber" value="{{user_info.emergencycontactnumber}}" placeholder="{{user_info.emergencycontactnumber}}">
+                            </div>
+                            </div>
+                            {% endif %}
+
+                            {% if user_info.emergencycontactemail == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Emergency Contact Email:</label>
+                                <input type="text" class="form-control  " id="emergencycontactemail" name="emergencycontactemail" value="{{user_info.emergencycontactemail}}" placeholder="{{user_info.emergencycontactemail}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">Emergency Contact Email:</label>
+                                <input type="text" class="form-control" id="emergencycontactemail" name="emergencycontactemail" value="{{user_info.emergencycontactemail}}" placeholder="{{user_info.emergencycontactemail}}">
+                            </div>
+                            </div>
+                            {% endif %}
+
+                            {% if user_info.primaryspeciality == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal mx-4">
+                                <label for="phone">Primary Speciality:</label>
+                                <input type="text" class="form-control  " id="primaryspeciality" name="primaryspeciality" value="{{user_info.primaryspeciality}}" placeholder="{{user_info.primaryspeciality}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal mx-4">
+                                <label for="phone">Primary Speciality:</label>
+                                <input type="text" class="form-control" id="primaryspeciality" name="primaryspeciality" value="{{user_info.primaryspeciality}}" placeholder="{{user_info.primaryspeciality}}">
+                            </div>
+                            </div>
+                            {% endif %}
+
+                            {% if user_info.generalsurgery == "" %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">General Surgery:</label>
+                                <input type="text" class="form-control  " id="generalsurgery" name="generalsurgery" value="{{user_info.generalsurgery}}" placeholder="{{user_info.generalsurgery}}">
+                            </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                            <div class="form-group-horizontal">
+                                <label for="phone">General Surgery:</label>
+                                <input type="text" class="form-control" id="generalsurgery" name="generalsurgery" value="{{user_info.generalsurgery}}" placeholder="{{user_info.generalsurgery}}">
+                            </div>
+                            </div>
+                            {% endif %}
+                            
+                            {% if user_info.secondaryspeciality == "" %}
+                            <div class="col-md-5 mx-5">
+                                <div class="form-group">
+                                    <label for="secondaryspeciality">Secondary Speciality:</label>
+                                    <input type="text" class="form-control  " id="secondaryspeciality" name="secondaryspeciality" value="{{ user_info.secondaryspeciality }}" placeholder="{{ user_info.secondaryspeciality }}">
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="col-md-5 mx-5">
+                                <div class="form-group">
+                                    <label for="secondaryspeciality">Secondary Speciality:</label>
+                                    <input type="text" class="form-control" id="secondaryspeciality" name="secondaryspeciality" value="{{ user_info.secondaryspeciality }}" placeholder="{{ user_info.secondaryspeciality }}">
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+                            <div class="col-md-5 mx-5">
+                                <div class="form-group-horizontal">
+                                    <label for="abletoworkintheusa">Able to Work in the USA:</label>
+                                    <input type="checkbox"  id="abletoworkintheusa" name="abletoworkintheusa" {% if user_info.abletoworkintheusa %}checked{% endif %} value="True">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group-horizontal">
+                                <label for="workauthorizationa">Preferred phone type:</label>
+                                <select class="form-control" id="workauthorizationa" name="workauthorizationa">
+                                    <option value="{{user_info.workauthorizationa}}" selected>{{user_info.workauthorizationa}}</option>
+                                    <option value="Option 1">Option 1</option>
+                                    <option value="Option 2">Option 2</option>
+                                    <option value="Option 3">Option 3</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+
+    
+                            
+                            
+                            <button type="submit" class="btn btn-primary mt-4">Submit Form</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+<br><br><br>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    document.getElementById('phone').addEventListener('input', function() {
+        var phoneInput = document.getElementById('phone');
+        var phoneMax = document.getElementById('phone-max');
+        var phoneMin = document.getElementById('phone-min');
+        var successMessage = document.getElementById('success-message');
+        if (phoneInput.value.length > 10) {
+            phoneMax.style.display = 'block';
+            phoneMin.style.display = 'none'; // Hide the minimum length alert if exceeded
+        } else if (phoneInput.value.length < 10) {
+            phoneMin.style.display = 'block';
+            phoneMax.style.display = 'none'; // Hide the maximum length alert if not exceeded
+        } else {
+            phoneMin.style.display = 'none'; // Hide both alerts if the length is exactly 10
+            phoneMax.style.display = 'none';
+            successMessage.style.display = 'block'; // Show success message
+            setTimeout(function() {
+                successMessage.style.display = 'none'; // Hide success message after 2 seconds
+            }, 2000);
+        }
+
+    }
+    );
+    
+</script>
+
+<script>
+    document.getElementById('zipcode').addEventListener('input', function() {
+        var phoneInput = document.getElementById('zipcode');
+        var phoneMax = document.getElementById('zip-min');
+        var phoneMin = document.getElementById('zip-max');
+        var successMessage = document.getElementById('success-zip');
+        if (phoneInput.value.length > 5) {
+            phoneMax.style.display = 'block';
+            phoneMin.style.display = 'none'; // Hide the minimum length alert if exceeded
+        } else if (phoneInput.value.length < 5) {
+            phoneMin.style.display = 'block';
+            phoneMax.style.display = 'none'; // Hide the maximum length alert if not exceeded
+        } else {
+            phoneMin.style.display = 'none'; // Hide both alerts if the length is exactly 10
+            phoneMax.style.display = 'none';
+            successMessage.style.display = 'block'; // Show success message
+            setTimeout(function() {
+                successMessage.style.display = 'none'; // Hide success message after 2 seconds
+            }, 2000);
+        }
+
+    }
+    );
+
+</script>
+
+
+<script>
+    document.getElementById('socialsecuritynumber').addEventListener('input', function() {
+        var phoneInput = document.getElementById('socialsecuritynumber');
+        var phoneMax = document.getElementById('ssn-min');
+        var phoneMin = document.getElementById('ssn-max');
+        var successMessage = document.getElementById('success-ssn');
+        if (phoneInput.value.length > 9) {
+            phoneMax.style.display = 'block';
+            phoneMin.style.display = 'none'; // Hide the minimum length alert if exceeded
+        } else if (phoneInput.value.length < 9) {
+            phoneMin.style.display = 'block';
+            phoneMax.style.display = 'none'; // Hide the maximum length alert if not exceeded
+        } else {
+            phoneMin.style.display = 'none'; // Hide both alerts if the length is exactly 10
+            phoneMax.style.display = 'none';
+            successMessage.style.display = 'block'; // Show success message
+            setTimeout(function() {
+                successMessage.style.display = 'none'; // Hide success message after 2 seconds
+            }, 2000);
+        }
+
+    }
+    );
+
+</script>
+
+<script>
+    document.getElementById('phone').addEventListener('input', function() {
+        var phoneInput = document.getElementById('phone');
+        var phoneMax = document.getElementById('n-min');
+        var phoneMin = document.getElementById('n-max');
+        var successMessage = document.getElementById('success-n');
+        if (phoneInput.value.length > 10) {
+            phoneMax.style.display = 'block';
+            phoneMin.style.display = 'none'; // Hide the minimum length alert if exceeded
+        } else if (phoneInput.value.length < 10) {
+            phoneMin.style.display = 'block';
+            phoneMax.style.display = 'none'; // Hide the maximum length alert if not exceeded
+        } else {
+            phoneMin.style.display = 'none'; // Hide both alerts if the length is exactly 10
+            phoneMax.style.display = 'none';
+            successMessage.style.display = 'block'; // Show success message
+            setTimeout(function() {
+                successMessage.style.display = 'none'; // Hide success message after 2 seconds
+            }, 2000);
+        }
+
+    }
+    );
+
+</script>
+
+
+{% endblock %}
