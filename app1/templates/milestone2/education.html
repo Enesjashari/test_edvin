@@ -1,0 +1,127 @@
+{% extends 'milestone2/base.html' %}
+{% load static %}
+
+{% block title %} Education Form {% endblock %}
+
+{% block table  %} 
+<div class="container">
+    <div class="table-container">
+        <form method="post" action="{% url 'education-info' %}">
+            {% csrf_token %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags == "error" %}
+                            <li class="alert alert-danger">{{ message }}</li>
+                        {% else %}
+                            <li class="alert alert-success">{{ message }}</li>
+                        {% endif %}    
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <h1 class="personal-info-header">Education</h1>
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="institution"><i class="fas fa-school"></i> Institution:</label>
+                    <input type="text" class="profile-input" id="institution" name="institution" value="{{ education.institution }}">
+                </div>
+                <div class="input-container">
+                    <label for="degreeaw" class="profile-label"><i class="fas fa-graduation-cap"></i> Degree Awarded:</label>
+                    <select class="profile-input" id="degreeaw" name="degreeaw">
+                        {% for value, label in DEGREE_CHOICES %}
+                        <option value="{{ value }}" {% if education.degreeaw == value %} selected {% endif %}>
+                            {{ label }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="degree" class="profile-label"><i class="fas fa-graduation-cap"></i> Degree:</label>
+                    <select class="profile-input" id="degree" name="degree">
+                        {% for value, label in DEGREE_CHOICES %}
+                        <option value="{{ value }}" {% if education.degree == value %} selected {% endif %}>
+                            {{ label }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="input-container">
+                    <label for="address"><i class="fas fa-map-marker-alt"></i> Address:</label>
+                    <input type="text" class="profile-input" id="address" name="address" value="{{ education.address }}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="city"><i class="fas fa-city"></i> City:</label>
+                    <input type="text" class="profile-input" id="city" name="city" value="{{ education.city }}">
+                </div>
+                <div class="input-container">
+                    <label for="state" class="profile-label"><i class="fas fa-map-marker-alt"></i> State:</label>
+                    <select class="profile-input" id="state" name="state">
+                        {% for state_code, state_name in STATE_CHOICES %}
+                        <option value="{{ state_code }}" {% if education.state == state_code %} selected {% endif %}>
+                            {{ state_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="zip"><i class="fas fa-map-marker-alt"></i> Zip Code:</label>
+                    <input type="text" class="profile-input" id="zip" name="zip" value="{{ education.zip }}">
+                </div>
+                <div class="input-container">
+                    <label for="country" class="profile-label"><i class="fas fa-globe"></i> Country:</label>
+                    <select class="profile-input" id="country" name="country">
+                        {% for country_code, country_name in COUNTRY_CHOICES %}
+                        <option value="{{ country_code }}" {% if education.country == country_code %} selected {% endif %}>
+                            {{ country_name }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="phone"><i class="fas fa-phone"></i> Phone:</label>
+                    <input type="text" class="profile-input" id="phone" name="phone" value="{{ education.phone }}">
+                </div>
+                <div class="input-container">
+                    <label for="start"><i class="far fa-calendar-alt"></i> Start Date:</label>
+                    <input type="date" class="profile-input" id="start" name="start" value="{{ education.start|date:'Y-m-d' }}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="end"><i the="far fa-calendar-alt"></i> End Date:</label>
+                    <input type="date" class="profile-input" id="end" name="end" value="{{ education.end|date:'Y-m-d' }}">
+                </div>
+                <div class="input-container">
+                    <label for="graduated" class="profile-label"><i class="fas fa-graduation-cap"></i> Graduated:</label>
+                    <select class="profile-input" id="graduated" name="graduated">
+                        {% for value, label in DEGREE_CHOICES %}
+                        <option value="{{ value }}" {% if education.graduated == value %} selected {% endif %}>
+                            {{ label }}
+                        </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="date"><i class="far fa-calendar-alt"></i> Date of Graduation:</label>
+                    <input type="date" class="profile-input" id="date" name="date" value="{{ education.date|date:'Y-m-d' }}">
+                </div>
+            </div>
+            <br>
+            <div class="form-row">
+                <button type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

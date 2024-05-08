@@ -5,8 +5,7 @@
   <title>Test Address API</title>
   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
   <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
-  <script type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}"></script>
-  <script async defer type="text/javascript" src="{% static 'assets/js/autocomplete.js' %}"></script>
+
 </head>
 <body>
     <div class="container">
@@ -46,9 +45,16 @@
           </div>
         </div>
 
+        <!-- Save Button -->
+        <div class="row">
+          <div class="form-group col-md-12">
+            <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+          </div>
+        </div>
+        <!-- Save Button End-->
       </div>
     </div>
-
+    <!-- JavaScript Start -->
     <script>
       var placeSearch, autocomplete;
 
@@ -101,6 +107,10 @@
         }
       }
     </script>
+    <!-- JavaScript End -->
+    
+    <!-- Google API Start -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQPuaKc0ylzdaoxy-ou43GPiGgh80yZa0&libraries=places&callback=initMap" async defer></script>
+    <!-- Google API End -->
   </body>
 </html>

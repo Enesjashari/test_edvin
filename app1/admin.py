@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Informations,Address, Education, Medicaleducation,gschool,MedicalTraining,Residency,Fellowship,Preceptorship,Fifthpathway,Boardcertifications,Lifesupport,Licences,Dearegistration,Licencesnotherexams
+from .models import Informations,Education,Agreements, hospitals,Medicaleducation,gschool,MedicalTraining,Residency,Fellowship,Preceptorship,Fifthpathway,Boardcertifications,Lifesupport,Licences,Dearegistration,Licencesnotherexams
 from django.contrib.auth.models import User
 
 # Define your inline classes
@@ -9,10 +9,16 @@ class AccountInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = "Additional Information"
 
-class AddressInline(admin.StackedInline):
-    model = Address
+class Agreementsinline(admin.StackedInline):
+    model = Agreements
     can_delete = False
-    verbose_name_plural = "Address"
+    verbose_name_plural = "Agreements"
+
+class hospitalsinline(admin.StackedInline):
+    model = hospitals
+    can_delete = False
+    verbose_name_plural = "Hospitals"
+ 
 
 class EducationInline(admin.StackedInline):
     model = Education
@@ -96,9 +102,12 @@ class LicencesnotherexamsInline(admin.StackedInline):
 @admin.register(Informations)
 class InformationsAdmin(admin.ModelAdmin):
     pass
+@admin.register(Agreements)
+class AgreementsAdmin(admin.ModelAdmin):
+    pass
 
-@admin.register(Address)
-class AddressAdmin(admin.ModelAdmin):
+@admin.register(hospitals)
+class hospitalsAdmin(admin.ModelAdmin):
     pass
 
 @admin.register(Education)
@@ -151,8 +160,8 @@ class LicencesnotherexamsAdmin(admin.ModelAdmin):
 
 # Extend UserAdmin to include your inlines
 class CustomUserAdmin(UserAdmin):
-    inlines = [AccountInline, EducationInline,AddressInline, MeducationInline,GschoolInline,MedicaltrainingInline,
-               ResidencyInline,AccountInline,FellowshipInline,PreceptorshipInline,FifthpathwayInline,BoardcertificationsInline,LifesupportInline,LicencesInline,DeaInline,LicencesnotherexamsInline]
+    inlines = [AccountInline, EducationInline, MeducationInline,GschoolInline,MedicaltrainingInline,
+               ResidencyInline,AccountInline,Agreementsinline,FellowshipInline,hospitalsinline,PreceptorshipInline,FifthpathwayInline,BoardcertificationsInline,LifesupportInline,LicencesInline,DeaInline,LicencesnotherexamsInline]
 
 # Unregister the default UserAdmin
 admin.site.unregister(User)

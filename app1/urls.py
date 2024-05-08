@@ -25,13 +25,20 @@ urlpatterns = [
     #End forgot my password ----
     path('update-edu/', views.update_edu, name='update-edu'),
     path('edu-data', views.edu_data, name='edu_data'),
-    path('update-info_Medicaleducation/', views.update_info_Medicaleducation, name='update_info_Medicaleducation'),
-    path('update-data_Medicaleducation/', views.update_data_Medicaleducation, name='update_data_Medicaleducation'),
-    path('update-info-gschool/', views.update_info_gschool, name='update_info_gschool'),
-    path('update-data-gschool/', views.update_data_gschool, name='update_data_gschool'),
+
 
     path('autocomplete/', views.autocomplete_view, name='autocomplete'),
     path('user-data/<str:id>', views.user_data, name='user-data'),
+    path('personal-info/', views.personal_information, name='personal-info'),
+    path('education-info/', views.education_info, name='education-info'),
+    path('graduate-school-info/', views.graduate_school_info, name='graduate-school-info'),
+    path('medical-education/', views.medical_education_info, name='medical-education-info'),
+    path('update-info-Education/', views.update_info_Education, name='update_info_Education'),
+    path('update-data-Education/', views.update_data_Education, name='update_data_Education'),
+    path('update-info-gschool/', views.update_info_gschool, name='update_info_gschool'),
+    path('update-data-gschool/', views.update_data_gschool, name='update_data_gschool'),
+    path('update-info_Medicaleducation/', views.update_info_Medicaleducation, name='update_info_Medicaleducation'),
+    path('update-data_Medicaleducation/', views.update_data_Medicaleducation, name='update_data_Medicaleducation'),
 
 
 

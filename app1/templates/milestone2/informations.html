@@ -1,0 +1,189 @@
+{% extends 'milestone2/base.html' %}
+
+{% block title %} Personal Information Update {% endblock %}
+
+{% block table %}
+<section class="middle">
+    <div class="table-container">
+        <form class="detailsinputs" method="post" action="{% url 'personal-info' %}">
+            {% csrf_token %}
+            <h1 class="personal-info-header">Personal Information</h1>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="preffix" class="profile-label"><i class="fas fa-user"></i> Prefix:</label>
+                    <select class="profile-input" id="preffix" name="preffix">
+                        <option value="" {% if not info.preffix %}selected{% endif %}></option>
+                        <option value="Mr." {% if info.preffix == "Mr." %}selected{% endif %}>Mr.</option>
+                        <option value="Mrs." {% if info.preffix == "Mrs." %}selected{% endif %}>Mrs.</option>
+                        <option value="Dr." {% if info.preffix == "Dr." %}selected{% endif %}>Dr.</option>
+                    </select>
+                </div>
+                
+                <div class="input-container">
+                    <label for="suffix" class="profile-label"><i class="fas fa-user"></i> Suffix:</label>
+                    <select class="profile-input" id="suffix" name="suffix">
+                        <option value="" {% if not info.suffix %}selected{% endif %}></option>
+                        <option value="Jr." {% if info.suffix == "Jr." %}selected{% endif %}>Jr.</option>
+                        <option value="Sr." {% if info.suffix == "Sr." %}selected{% endif %}>Sr.</option>
+                        <option value="III" {% if info.suffix == "III" %}selected{% endif %}>III</option>
+                    </select>
+                </div>
+                
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="social-security-number"><i class="fas fa-id-card"></i> Social Security Number:</label>
+                    <input type="text" id="socialsecuritynumber" name="socialsecuritynumber" value="{{ info.socialsecuritynumber }}">
+                </div>
+                <div class="input-container">
+                    <label for="preferred-phone-type"><i class="fas fa-phone-alt"></i> Preferred Phone Type:</label>
+                    <input type="text" id="preferredphonetype" name="preferredphonetype" value="{{ info.preferredphonetype }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="phone"><i class="fas fa-phone"></i> Phone:</label>
+                    <input type="text" id="phone" name="phone" value="{{ info.phone }}">
+                </div>
+                <div class="input-container">
+                    <label for="other-phone"><i the="fas fa-phone"></i> Other Phone:</label>
+                    <input type="text" id="otherphone" name="otherphone" value="{{ info.otherphone }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="address"><i class="fas fa-map-marker-alt"></i> Search Location:</label>
+                    <input type="search" class="form-control" id="autocomplete" placeholder="Search location" onFocus="geolocate()">
+                </div>
+                <div class="input-container">
+                    <label for="address"><i class="fas fa-map-marker-alt"></i> Address:</label>
+                    <input type="text" class="form-control" id="route" name="address" placeholder="Street Address" value="{{ info.address }}">
+                </div>
+                <div class="input-container">
+                    <label for="generalsurgery"><i the="fas fa-user-md"></i> Street No:</label>
+                    <input type="text" class="form-control" id="street_number" name="streetno" placeholder="Street No" value="{{ info.streetno }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="city"><i class="fas fa-city"></i> City:</label>
+                    <input type="text" class="form-control" id="locality" name="city" placeholder="City" value="{{ info.city }}">
+                </div>
+                <div class="input-container">
+                    <label for="stateprovince"><i class="fas fa-map-marker-alt"></i> State/Province:</label>
+                    <input type="text" class="form-control" id="administrative_area_level_1" name="stateprovince" placeholder="State" value="{{ info.stateprovince }}">
+                </div>
+                <div class="input-container">
+                    <label for="zipcode"><i class="fas fa-map-marker-alt"></i> Zip Code:</label>
+                    <input type="text" class="form-control" id="postal_code" name="zipcode" placeholder="Zip Code" value="{{ info.zipcode }}">
+                </div>
+                <div class="input-container">
+                    <label for="country"><i class="fas fa-globe"></i> Country:</label>
+                    <input type="text" class="form-control" id="country" name="country" placeholder="Country" value="{{ info.country }}">
+                    
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="input-container">
+                    <label for="mailaddress"><i class="fas fa-envelope"></i> Mail Address:</label>
+                    <input type="text" id="mailaddress" name="mailaddress" value="{{ info.mailaddress }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="mailcity"><i class="fas fa-city"></i> Mail City:</label>
+                    <input type="text" id="mailcity" name="mailcity" value="{{ info.mailcity }}">
+                </div>
+                <div class="input-container">
+                    <label for="mailingstateprovince"><i class="fas fa-map-marker-alt"></i> Mailing State/Province:</label>
+                    <input type="text" id="mailingstateprovince" name="mailingstateprovince" value="{{ info.mailingstateprovince }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="mailingzipcode"><i class="fas fa-map-marker-alt"></i> Mailing Zip Code:</label>
+                    <input type="text" id="mailingzipcode" name="mailingzipcode" value="{{ info.mailingzipcode }}">
+                </div>
+                <div class="input-container">
+                    <label for="mailingcountry"><i class="fas fa-globe"></i> Mailing Country:</label>
+                    <input type="text" id="mailingcountry" name="mailingcountry" value="{{ info.mailingcountry }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="birthcity"><i class="fas fa-city"></i> Birth City:</label>
+                    <input type="text" id="birthcity" name="birthcity" value="{{ info.birthcity }}">
+                </div>
+                <div class="input-container">
+                    <label for="birthcountry"><i class="fas fa-globe"></i> Birth Country:</label>
+                    <input type="text" id="birthcountry" name="birthcountry" value="{{ info.birthcountry }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="birthstateprovince"><i class="fas fa-map-marker-alt"></i> Birth State/Province:</label>
+                    <input type="text" id="birthstateprovince" name="birthstateprovince" value="{{ info.birthstateprovince }}">
+                </div>
+                <div class="input-container">
+                    <label for="languages"><i class="fas fa-language"></i> Languages Spoken Other Than English:</label>
+                    <input type="text" id="languages" name="languagesspokenotherthanenglish" value="{{ info.languagesspokenotherthanenglish }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="emergencycontactname"><i class="fas fa-user"></i> Emergency Contact Name:</label>
+                    <input type="text" id="emergencycontactname" name="emergencycontactname" value="{{ info.emergencycontactname }}">
+                </div>
+                <div class="input-container">
+                    <label for="emergencycontactnumber"><i the="fas fa-phone"></i> Emergency Contact Number:</label>
+                    <input type="text" id="emergencycontactnumber" name="emergencycontactnumber" value="{{ info.emergencycontactnumber }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="emergencycontactemail"><i class="fas fa-envelope"></i> Emergency Contact Email:</label>
+                    <input type="text" id="emergencycontactemail" name="emergencycontactemail" value="{{ info.emergencycontactemail }}">
+                </div>
+                <div class="input-container">
+                    <label for="primaryspeciality"><i class="fas fa-user-md"></i> Primary Specialty:</label>
+                    <input type="text" id="primaryspeciality" name="primaryspeciality" value="{{ info.primaryspeciality }}">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-container">
+                    <label for="generalsurgery"><i the="fas fa-user-md"></i> General Surgery:</label>
+                    <input type="text" id="generalsurgery" name="generalsurgery" value="{{ info.generalsurgery }}">
+                </div>
+                <div class="input-container">
+                    <label for="secondaryspeciality"><i the="fas fa-user-md"></i> Secondary Specialty:</label>
+                    <input type="text" id="secondaryspeciality" name="secondaryspeciality" value="{{ info.secondaryspeciality }}">
+                </div>
+            </div>
+            <!-- <div class="form-row">
+                <div class="input-container">
+                    <label for="secondaryspeciality"><i the="fas fa-user-md"></i> Secondary Specialty:</label>
+                    <input type="text" id="secondaryspeciality" name="secondaryspeciality" value="{{ info.secondaryspeciality }}">
+                </div>
+            </div> -->
+
+            <div class="form-row">
+                <button type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

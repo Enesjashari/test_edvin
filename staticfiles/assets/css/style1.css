@@ -1,0 +1,1024 @@
+:root {
+    --color-white: #ffffff;
+    --color-light: #f0eff5;
+    --color-gray-light: #86848c;
+    --color-dark: #27282f;
+    --color-primary: rgb(71, 7, 234);
+    --color-success: rgb(34, 202, 75);
+    --color-danger: rgb(255, 67, 54);
+    --color-warning: rgb(234, 181, 7);
+    --color-purple: rgb(160, 99, 245);
+    --color-primary-light: rgba(71, 7, 234, 0.2);
+    --color-success-light: rgba(34, 202, 75, 0.2);
+    --color-danger-light: rgba(255, 67, 54, 0.2);
+    --color-purple-light: rgba(160, 99, 245, 0.2);
+    --card-padding: 1.6rem;
+    --padding-1: 1rem;
+    --padding-2: 8px;
+    --card-border-radius: 1.6rem;
+    --border-radius-1: 1rem;
+    --border-radius-2: 6px;
+}
+.dark-theme .form-row input {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #36373f;
+    color: #ddd; /* Lighter text color */
+ 
+}
+.dark-theme .profile-input,
+.dark-theme .profile-input option {
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    background-color: #36373f;
+    color: #ddd; /* Lighter text color */
+}
+
+/* CHECK BOXX */
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 20px;
+    height: 20px;
+   
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative; 
+}
+
+
+input[type="checkbox"]::after {
+    content: ""; 
+    position: absolute;
+    top: 5px; 
+    left: 6px;
+    width: 5px;
+    height: 10px; 
+    border: 2px solid var(--color-primary); 
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg); 
+    opacity: 0; 
+}
+
+
+input[type="checkbox"]:checked::after {
+    opacity: 1; 
+}
+
+.dark-theme{
+    --color-white:#131316;
+    --color-light:#23232a;
+    --color-dark:#ddd;
+    --color-gray-dark:#adacb5;
+
+}
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    border: 0;
+    appearance: none;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 12px;
+}
+
+body {
+    background-color: var(--color-light);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    color: var(--color-dark);
+}
+
+img {
+    max-width: 100%;
+}
+
+h1 {
+    font-size: 2.2rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+h3 {
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+h5 {
+    font-size: 0.86rem;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: 0.76rem; /* Adjusted size for better readability */
+}
+
+p {
+    font-size: 0.86rem;
+    color: var(--color-gray-dark);
+}
+
+small {
+    font-weight: 300;
+    font-size: 0.77rem;
+}
+
+.text-muted {
+    color: var(--color-gray-light);
+}
+.primary{
+    color:var(--color-primary);
+}
+.danger{
+    color:var(--color-danger);
+}
+.success{
+    color: var(--color-success);
+}
+.purple{
+    color:var(--color-purple);
+}
+.bg-primary{
+    background: var(--color-primary);
+    box-shadow: 0 0.8rem 0.8rem var(--color-primary-light);
+}
+.bg-danger{
+    background: var(--color-danger);
+    box-shadow: 0 0.8rem 0.8rem var(--color-danger-light);
+}
+.bg-success{
+    background: var(--color-success);
+    box-shadow: 0 0.8rem 0.8rem var(--color-success-light);
+}
+.bg-purple{
+    background: var(--color-purple);
+    box-shadow: 0 0.8rem 0.8rem var(--color-purple-light);
+}
+.bg-dark{
+    background: #27282f;
+    box-shadow: 0 0.8rem 0.8rem rgba(0, 0, 0, 0.2);
+}
+.bg-purple-light{
+    background: var(--color-purple-light);
+}
+.bg-danger-light{
+    background: var(--color-danger-light);
+}
+.bg-primary-light{
+    background: var(--color-primary-light);
+}
+.bg-success-light{
+    background: var(--color-success-light);
+}
+
+/* Additional styles for the navigation bar */
+nav {
+    width: 100%;
+    background: var(--color-white);
+    padding: 1rem 0;
+    box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1); /* Added box-shadow for a subtle elevation effect */
+}
+
+nav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 96%;
+    margin: 0 auto;
+}
+
+nav img.logo {
+    width: 7rem;
+    height: auto; /* Ensures the logo maintains its aspect ratio */
+}
+
+nav .search-bar {
+    background: var(--color-light);
+    padding: var(--padding-2) var(--card-padding);
+    width: 32vw;
+    border-radius: var(--border-radius-2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--color-gray-light);
+    position: absolute;
+    left: 15%;
+}
+
+nav .search-bar input[type='search'] {
+    color: var(--color-dark);
+    background: transparent;
+    width: 100%;
+    border: 1px solid var(--color-gray-light); /* Added a border for better visibility */
+    border-radius: var(--border-radius-2);
+    padding: 0.5rem;
+}
+
+nav .search-bar input[type='search']::placeholder {
+    color: var(--color-gray-dark);
+}
+
+nav .profile-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 4rem;
+}
+
+nav .profile-area .theme-btn {
+    display: flex;
+    background: var(--color-light);
+    width: 5rem;
+    height: 2rem;
+    border-radius: 0; 
+    cursor: pointer;
+}
+
+
+nav .profile-area .theme-btn span {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+nav .profile-area .theme-btn .active {
+    background: var(--color-dark);
+    border-radius: var(--border-radius-2);
+    color: var(--color-white);
+}
+
+nav .profile-area .profile {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+nav .profile-area .profile-photo {
+    display: block;
+    width: 4rem;
+    height: 4rem;
+ 
+    overflow: hidden;
+    border: 2px solid blue; /* Added blue border */
+}
+
+
+nav .profile-area button {
+    display: none;
+}
+
+/* ASIDE & SIDEBAR*/
+
+main{
+    display:grid;
+    grid-template-columns:16rem auto 6rem;
+    gap:2rem;
+    width:96%;
+    margin: 1rem auto 4rem;;
+}
+main aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 280px); /* Adjusted height to account for close button */
+
+    border-radius: 10px; /* Added border radius for a softer look */
+    box-shadow: 0 8px 20px rgba(12, 2, 85, 0.2); /* Increased box shadow size */
+    padding: 15px; /* Increased padding for better spacing */
+}
+
+main aside button#close-btn{
+    display: none;
+}
+main aside .sidebar a{
+    display: flex;
+    align-items: center;
+    gap:1.2rem;
+    height:4.2rem;
+    color:var(--color-gray-light);
+    position: relative;
+}
+main aside .sidebar a span{
+    font-size: 1.7rem;
+    margin-left: 3rem;
+    transition: all 300ms ease;
+}
+main aside .sidebar a.active{
+    background: var(--color-white);
+    color:var(--color-primary);
+}
+main aside .sidebar a.active:before {
+    content: "";
+    width: 6px;
+    border-radius: 10px;
+    height: 100%;
+    position: absolute;
+    background: var(--color-primary);
+    transition: all 0.3s ease; 
+    transform: scaleX(1); 
+    transform-origin: right; 
+}
+
+main aside .sidebar a.active:hover:before,
+main aside .sidebar a.active:focus:before {
+    transform: scaleX(0); /* Scale in the X-axis to hide the indicator */
+}
+
+main aside .sidebar a.active:hover {
+    background: var(--color-white); /* Change background color on hover */
+    color: var(--color-primary);
+}
+
+main aside .sidebar a:hover{
+    color:var(--color-primary);
+}
+main aside .sidebar a:hover span{
+    margin-left: 2rem;
+}
+main aside .sidebar h4{
+    font-weight: 500;
+}
+
+/* Updates */
+main aside .updates{
+    background: var(--color-white);
+    border-radius: var(--border-radius-1);
+    text-align: center;
+    padding: var(--card-padding);
+}
+
+main aside .updates span{
+    font-size: 2.8rem;
+}
+main aside .updates h4{
+    margin: 1rem 0;
+}
+main aside .updates a{
+    display: block;
+    width:100%;
+    background: var(--color-primary);
+    color:var(--color-white);
+    border-radius: var(--border-radius-1);
+    padding: 0.8rem 0;
+    margin-top: 2rem;
+    transition: all 300ms ease;
+}
+
+main aside .updates a:hover{
+    box-shadow: 0 1rem 2rem var(--color-primary-light);
+}
+/* MIDDLE*/
+main section.middle .header{
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    width:100%;
+}
+main section.middle .header input[type="date"]{
+    padding: 0.5rem 2rem;
+    border-radius: var(--border-radius-2);
+    background: var(--color-white);
+    color:var(--color-gray-dark);
+}
+
+
+
+
+/* MEDIA QUERIES FOR TABLETS */
+
+@media screen and (max-width: 1024px) {
+    nav .search-bar {
+    display: none;
+   
+    }
+
+    nav .profile-area {
+    gap: 2rem;
+  
+    }
+    nav .profile-area button#menu-btn {
+    display: inline;
+    background: transparent;
+    color: var(--color-dark);
+    }
+    main{
+        grid-template-columns: 1fr;
+    }
+    main aside{
+        position: fixed;
+        top: 0;
+        left:-100%;
+        z-index: 3;
+        background: var(--color-white);
+        width:22rem;
+        height:100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation:showSidebar 500ms ease forwards;
+    }
+
+    @keyframes showSidebar{
+        to{
+            left: 0;
+        }
+    }
+    main aside button#close-btn{
+        display: inline-block;
+        width:3rem;
+        height:3rem;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        z-index: 4;
+        background: transparent;
+        color:var(--color-dark);
+        display: none;
+    }
+    button:hover{
+        cursor: pointer;
+    }
+    main aside .sidebar{
+        margin-top: 4rem;
+    }
+
+}
+
+/* MEDIA QUERIES FOR MOBILE */
+
+/* Media query for mobile */
+@media screen and (max-width: 600px) {
+    nav .container {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center align items */
+    }
+
+    nav .profile-area {
+        gap: 1rem; /* Reduce the gap between profile items */
+        margin-top: 1rem; /* Add some top margin */
+    }
+
+    nav .profile-area button#menu-btn {
+        margin-right: auto; /* Move the menu button to the left */
+    }
+
+    nav img.logo {
+        margin-bottom: 1rem; /* Add some bottom margin to the logo */
+    }
+
+    nav .search-bar {
+        width: 80%; /* Adjust the width of the search bar */
+        left: 10%; /* Center the search bar */
+    }
+
+    nav .search-bar input[type='search'] {
+        width: 100%; /* Make the search input full width */
+    }
+}
+
+
+/* table */
+.table-container {
+    margin: 10px auto; /* Center the table */
+    width: 100%; /* Adjust the width as needed */
+    padding-top: 30px;
+    text-align: center;
+    
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px; /* Add border radius for a softer look */
+    overflow: hidden; /* Hide any overflow */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Add box shadow for depth */
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Add bottom border */
+}
+h1, h2, h5 {
+    margin: 5px 0;
+}
+
+.heading-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.left-heading {
+    text-align: left;
+}
+
+th {
+   
+    font-weight: bold;
+}
+tr:hover {
+
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.5); /* Blue shadow on hover */
+}
+
+.links {
+    text-align: center;
+    padding-left: 250px;
+}
+
+
+
+/* Link Styles */
+.links a {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    border-radius: 20px; /* Round corners for a sleek look */
+    background-color: #f0f0f0; /* Light gray background */
+    transition: background-color 0.3s, color 0.3s;
+    animation: fadeIn 0.5s ease; /* Fade in animation */
+}
+
+.links a:hover {
+    background-color: #333; /* Dark gray background on hover */
+    color: #fff; /* White text color on hover */
+    animation: pulse 0.5s infinite alternate; /* Pulse animation on hover */
+}
+/* input form */
+.table-container {
+    margin: 0;
+    text-align: center;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+/* dropdown */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 100px; /
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 10px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
+.material-icons {
+    vertical-align: middle;
+}
+/* Form Styles */
+form {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(12, 2, 85, 0.2); /* Increased box shadow size */
+}
+
+.form-row {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+}
+
+.button-link {
+    display: inline-block;
+    border-radius: 10px; /* Adjust border radius as needed */
+    overflow: hidden; /* Ensure the border radius is applied properly */
+}
+
+.button-link button {
+    padding: 8px 10px; /* Adjust padding as needed */
+    background-color: var(--color-primary); /* Change background color */
+    color: white; /* Change text color */
+    border: none; /* Remove default button border */
+    text-align: left; /* Center text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Make button inline */
+    font-size: 12px; /* Adjust font size as needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.button-link button:hover {
+    background-color: #1d1681; /* Change background color on hover */
+}
+
+.form-row div {
+    flex: 1;
+    margin-right: 10px;
+    width:100px;
+}
+
+.form-row label {
+    text-align: left;
+    display: block; /* Labels appear on top of inputs */
+    margin-bottom: 5px; /* Added margin to create space between label and input */
+}
+
+.form-row input {
+
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+
+
+.form-row button {
+    text-align: center;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+
+.form-row button:hover {
+    background-color: #0056b3;
+}
+/* Animation Keyframes */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.05);
+    }
+}
+
+
+/*profile */
+.sidebar-footer .profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sidebar-footer .profile-photo {
+    width: 3rem; /* Adjust size to match the profile photo in the navigation bar */
+    height: 3rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.sidebar-footer .profile-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-footer .profile-name {
+    font-size: 1rem; /* Adjust font size to match the profile name in the navigation bar */
+    font-weight: bold;
+    color: var(--color-dark);
+}
+
+.sidebar-footer .profile-role {
+    font-size: 0.9rem; /* Adjust font size to match the profile role in the navigation bar */
+    color: var(--color-gray-light);
+}
+
+/* Search bar styles */
+.search-bar {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+}
+.search-bar .material-icons {
+    font-size: 1.2rem; /* Adjust the size of the icon */
+    color: white; /* Adjust the color of the icon */
+    margin-right: 0px; /* Add margin between the icon and input */
+}
+
+.search-bar input[type='search'] {
+    padding: 0.5rem;
+    border:   #ccc;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    width: 170px; /* Adjust width as needed */
+    transition: border-color 0.3s ease; /* Add transition for smoother effect */
+}
+
+.search-bar input[type='search']::placeholder {
+    color: #999; /* Adjust placeholder color as needed */
+}
+
+.search-bar input[type='search']:focus {
+    border-color: #007bff; /* Change border color on focus */
+    outline: none; /* Remove default focus outline */
+}
+
+.search-bar button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.2rem;
+    margin-left: 8px; /* Add margin between input and button */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition for smoother effect */
+}
+
+.search-bar button:hover {
+    background-color: #0056b3; /* Change button background color on hover */
+}
+
+
+.personal-info-header {
+    font-size: 24px;
+
+    margin-bottom: 20px; /* Add some space below the header */
+    text-align: center; /* Center the text */
+    text-transform: uppercase; /* Convert text to uppercase */
+    border-bottom: 2px solid #007bff; /* Add a bottom border */
+    padding-bottom: 10px; /* Add some space between the text and border */
+}
+@media screen and (max-width: 1024px) {
+    nav .search-bar {
+        display: none;
+    }
+    nav .profile-area {
+        gap: 2rem;
+    }
+    nav .profile-area button#menu-btn {
+        display: inline;
+    }
+}
+@media screen and (max-width: 1024px) {
+    main aside {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        z-index: 3;
+        background: var(--color-white);
+        width: 22rem;
+        height: 100vh;
+        box-shadow: 2rem 0 2rem var(--color-primary-light);
+        display: none;
+        animation: showSidebar 500ms ease forwards;
+    }
+    main aside button#close-btn {
+        display: inline-block;
+    }
+}
+@media screen and (max-width: 600px) {
+    nav .profile-area {
+        gap: 2.6rem;
+    }
+    nav .profile h5,
+    nav .profile span {
+        display: none;
+    }
+    main section.middle .header input[type="date"] {
+        padding: 0.5rem 2rem;
+    }
+}
+@media screen and (max-width: 600px) {
+    main section.middle .cards {
+        grid-template-columns: 1fr;
+    }
+    main section.middle .fast-payment {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-top: 3rem;
+        gap: 1.2rem;
+    }
+}
+/* Media query for tablets */
+@media screen and (max-width: 768px) {
+    /* Adjust padding and text alignment for links */
+    .links {
+        padding-left: 3px; /* Smaller left padding */
+        text-align: center; /* Center align the links */
+    }
+
+    /* Adjust link padding and margin */
+    .links a {
+        padding: 6px 10px; /* Smaller padding */
+        margin: 0 2px; /* Smaller margin */
+    }
+}
+
+/* Media query for mobile */
+@media screen and (max-width: 600px) {
+    /* Decrease link padding and margin further */
+    th, td {
+        margin: 0;
+        padding: 1px;
+        font-size: 7px;
+    }
+   
+}
+
+/* Media query for mobile */
+@media screen and (max-width: 600px) {
+    /* Decrease link padding and margin further */
+ 
+.button-link button {
+
+    font-size: 8px; /* Adjust font size as needed */
+   
+}
+   
+}
+
+.button-link {
+    display: inline-block;
+    border-radius: 10px; /* Adjust border radius as needed */
+    overflow: hidden; /* Ensure the border radius is applied properly */
+}
+@media (min-width: 768px) {
+    aside {
+        display: block !important;
+    }
+    aside.active {
+        display: block !important;
+    }
+}
+
+aside {
+    display: none;
+
+}
+
+aside.active {
+    display: block;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-form {
+    width: 500px;
+}
+
+.profile-image {
+    text-align: center;
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease;
+}
+
+.profile-image img {
+    width: 150px; /* Adjust the size as needed */
+    height: 150px; /* Adjust the size as needed */
+ 
+    border: 2px solid #ccc; /* Optional: adds a border */
+    animation: bounceIn 1s ease;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    animation: slideInUp 1s ease;
+}
+
+.profile-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.profile-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+
+    border-radius: 5px;
+    animation: slideInRight 1s ease;
+}
+
+.btn-submit {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    animation: fadeInUp 1s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    from {
+        transform: scale(0.5);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .profile-container {
+        max-width: 50%; /* Set the maximum width to 100% for smaller screens */
+    }
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .form-container {
+        max-width: 50%;
+    }
+
+   
+}

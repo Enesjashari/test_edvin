@@ -13,8 +13,140 @@ from django.urls import reverse
 from django.core.mail import EmailMultiAlternatives
 from django.utils.html import strip_tags
 from django.contrib.auth import authenticate, login as auth_login  
+from django.contrib.auth.decorators import login_required
+from .models import Informations,Education,gschool,Medicaleducation,STATES,COUNTRY_CHOICES
+from .forms import EducationForm,gschoolForm,MedicaleducationForm
 
 
+@login_required
+def medical_education_info(request):
+    try:
+        medical_education = Medicaleducation.objects.get(user=request.user)
+    except Medicaleducation.DoesNotExist:
+        medical_education = Medicaleducation(user=request.user)
+        medical_education.save()
+
+    if request.method == 'POST':
+        medical_education.institution = request.POST.get('institution', '')
+        medical_education.degreeaw = request.POST.get('degreeaw', '')
+        medical_education.degree = request.POST.get('degree', '')
+        medical_education.address = request.POST.get('address', '')
+        medical_education.city = request.POST.get('city', '')
+        medical_education.state = request.POST.get('state', '')
+        medical_education.zip = request.POST.get('zip', '')
+        medical_education.country = request.POST.get('country', '')
+        medical_education.phone = request.POST.get('phone', '')
+        medical_education.start = request.POST.get('start', '')
+        medical_education.end = request.POST.get('end', '')
+        medical_education.graduated = request.POST.get('graduated', '')
+        medical_education.date = request.POST.get('date', '')  
+        medical_education.explain = request.POST.get('explain', '')
+        medical_education.save()
+        return redirect('medical-education-info')
+    
+
+    return render(request, 'milestone2/medical_education.html', {'medical_education': medical_education})
+
+
+@login_required
+def graduate_school_info(request):
+    try:
+        graduate_school = gschool.objects.get(user=request.user)
+    except gschool.DoesNotExist:
+        graduate_school = gschool(user=request.user)
+        graduate_school.save()
+
+    if request.method == 'POST':
+        graduate_school.institution = request.POST.get('institution', '')
+        graduate_school.degreeaw = request.POST.get('degreeaw', '')
+        graduate_school.degree = request.POST.get('degree', '')
+        graduate_school.address = request.POST.get('address', '')
+        graduate_school.city = request.POST.get('city', '')
+        graduate_school.state = request.POST.get('state', '')
+        graduate_school.zip = request.POST.get('zip', '')
+        graduate_school.country = request.POST.get('country', '')
+        graduate_school.phone = request.POST.get('phone', '')
+        graduate_school.start = request.POST.get('start', '')
+        graduate_school.end = request.POST.get('end', '')
+        graduate_school.graduated = request.POST.get('graduated', '')
+        graduate_school.date = request.POST.get('date', '')
+        graduate_school.save()
+        return redirect('graduate-school-info')
+    
+    return render(request, 'milestone2/graduate_school.html', {'graduate_school': graduate_school})
+
+
+@login_required
+def personal_information(request):
+    try:
+        info = Informations.objects.get(user=request.user)
+    except Informations.DoesNotExist:
+        info = Informations(user=request.user)
+        info.save()
+
+    if request.method == 'POST':
+        info.preffix = request.POST.get('preffix', info.preffix)
+        info.suffix = request.POST.get('suffix', info.suffix)
+        info.socialsecuritynumber = request.POST.get('socialsecuritynumber', info.socialsecuritynumber)
+        info.phone = request.POST.get('phone', info.phone)
+        info.preferredphonetype=request.POST.get('preferredphonetype', info.preferredphonetype)
+        info.otherphone = request.POST.get('otherphone', info.otherphone)
+        info.streetno = request.POST.get('streetno',info.streetno)
+        info.address = request.POST.get('address', info.address)
+        info.city = request.POST.get('city', info.city)
+        info.stateprovince = request.POST.get('stateprovince', info.stateprovince)
+        info.zipcode = request.POST.get('zipcode', info.zipcode)
+        info.country = request.POST.get('country', info.country)
+        info.mailaddress = request.POST.get('mailaddress', info.mailaddress)
+        info.mailcity = request.POST.get('mailcity', info.mailcity)
+        info.mailingstateprovince = request.POST.get('mailingstateprovince', info.mailingstateprovince)
+        info.mailingzipcode = request.POST.get('mailingzipcode', info.mailingzipcode)
+        info.mailingcountry = request.POST.get('mailingcountry', info.mailingcountry)
+        info.birthcity = request.POST.get('birthcity', info.birthcity)
+        info.birthcountry = request.POST.get('birthcountry', info.birthcountry)
+        info.birthstateprovince = request.POST.get('birthstateprovince', info.birthstateprovince)
+        info.npinumber = request.POST.get('npinumber', info.npinumber)
+        info.languagesspokenotherthanenglish = request.POST.get('languagesspokenotherthanenglish', info.languagesspokenotherthanenglish)
+        info.emergencycontactname = request.POST.get('emergencycontactname', info.emergencycontactname)
+        info.relationshiptoapplicant = request.POST.get('relationshiptoapplicant', info.relationshiptoapplicant)
+        info.emergencycontactnumber = request.POST.get('emergencycontactnumber', info.emergencycontactnumber)
+        info.emergencycontactemail = request.POST.get('emergencycontactemail', info.emergencycontactemail)
+        info.primaryspeciality = request.POST.get('primaryspeciality', info.primaryspeciality)
+        info.generalsurgery = request.POST.get('generalsurgery', info.generalsurgery)
+        info.secondaryspeciality = request.POST.get('secondaryspeciality', info.secondaryspeciality)
+        info.abletoworkintheusa = request.POST.get('abletoworkintheusa', info.abletoworkintheusa) in ['on', 'true', '1']
+        info.workauthorizationa = request.POST.get('workauthorizationa', info.workauthorizationa)
+        info.save()
+        return redirect('personal-info')
+    
+
+    return render(request, 'milestone2/informations.html', {'info': info})
+
+@login_required
+def education_info(request):
+    try:
+        education = Education.objects.get(user=request.user)
+    except Education.DoesNotExist:
+        education = Education(user=request.user)
+        education.save()
+
+    if request.method == 'POST':
+        education.institution = request.POST.get('institution', '')
+        education.degreeaw = request.POST.get('degreeaw', '')
+        education.degree = request.POST.get('degree', '')
+        education.address = request.POST.get('address', '')
+        education.city = request.POST.get('city', '')
+        education.state = request.POST.get('state', '')
+        education.zip = request.POST.get('zip', '')
+        education.country = request.POST.get('country', '')
+        education.phone = request.POST.get('phone', '')
+        education.start = request.POST.get('start', '')
+        education.end = request.POST.get('end', '')
+        education.graduated = request.POST.get('graduated', '')
+        education.save()
+        return redirect('education-info')
+
+    return render(request, 'milestone2/education.html', {'education': education})
 
 #Provide the users for super admin 
 def index(request):
@@ -25,7 +157,7 @@ def index(request):
         "logged_in_user": logged_in_user,
         "users":users,
     }
-    return render(request, "authentication/index2.html", context)
+    return render(request, "milestone2/index.html", context)
 
 #Handle the registration,confirmation link via email
 def register(request):
@@ -40,12 +172,6 @@ def register(request):
         password = request.POST.get('password', '')
         password2 = request.POST.get('password2', '')
 
-        # allowed_domains = ["gmail.com", "yahoo.com", "outlook.com", "hotmail.com", "aol.com", "protonmail.com", "icloud.com", "gmx.com"]
-        # domain = email.split("@")[1]
-
-        # if domain in allowed_domains :
-            # messages.error(request, 'Registration failed. Email used in this account might be a potential scam, try another one or contact us!')
-            # return redirect('register')
 
         if password != password2:
             messages.error(request, 'Passwords do not match.')
@@ -107,35 +233,12 @@ def confirm_email(request, uidb64, token):
         return redirect('login')
 
 
-
-
-
-
 # from .models import Updateinfo
 from .models import Informations
 from django.shortcuts import render, redirect
 from django.core.exceptions import ObjectDoesNotExist
 from .models import Informations
 from .models import COUNTRY_CHOICES 
-#Gether previus user data and prepare it for an update
-# def update_info(request):
-#     if request.method == 'POST':
-#         # Process form submission for updating additional user info
-#         return redirect('index')  # Redirect user after form submission
-#     else:
-#         try:
-#             user_info = Informations.objects.get(user=request.user.id)
-#             form = UserUpdateForm(instance=request.user)
-#         except ObjectDoesNotExist:
-#             user_info = None  # Or any default value you prefer
-        
-#         context = {
-#             "user": request.user,
-#             'user_info': user_info,
-#             "form":form,
-#             "COUNTRY_CHOICES":COUNTRY_CHOICES,
-#         }
-#         return render(request, 'update_info.html', context)
 
 def update_info(request):
     try:
@@ -271,39 +374,6 @@ def update_data(request):
         return redirect('index')
 
 
-# #Update previus data with new ones
-# def update_data(request):
-#     if request.method == 'POST':
-#         # Retrieve the form data
-#         address = request.POST.get('address')  # Truncate the value to 100 characters
-        
-#         phone_number = request.POST.get('phone')  # Truncate the value to 100 characters
-        
-#         city = request.POST.get('city')# Truncate the value to 100 characters
-
-#         prefix = request.POST.get('prefix')
-        
-#         # Get the current user
-#         user = request.user
-        
-#         # Retrieve or create Informations object for the user
-#         user_info, created = Informations.objects.get_or_create(user=user)
-        
-#         # Update the fields
-#         user_info.address = address
-#         user_info.phone = phone_number
-#         user_info.city = city
-#         user_info.preffix = prefix 
-#         user_info.save()
-        
-#         # Redirect to a success page or any other desired page
-#         return redirect('index')
-#     else:
-#         # Handle cases where the request method is not POST
-#         return redirect('index')
-
-
-
 #Handle the user login
 def login(request):
     if request.method == "POST":
@@ -328,9 +398,7 @@ def login(request):
 #Does the logout of user
 def logout(request):
     auth.logout(request)
-    return redirect('index')
-
-
+    return redirect('login')
 
 
 #Handle the Forgot My Password proccess
@@ -359,24 +427,6 @@ class ForgotMyPasswordView(View):
         return CustomPasswordResetView.as_view()(request)
 
 forgotmypassword = ForgotMyPasswordView.as_view()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 from .models import Education
@@ -438,22 +488,6 @@ def edu_data(request):
     
         # Get the current user
         user = request.user
-        
-
-        # if len(str(phone)) >10:
-        #     messages.error(request, "Social security number must be 10 characters or less.")
-        #     return redirect('update_info')
-        # if len(str(zipcode)) >5:
-        #     messages.error(request, "Zip Code must be 5 characters.")
-        #     return redirect('update_info')
-        # if len(str(socialsecuritynumber)) >10:
-        #     messages.error(request, "Social security number must be 10 characters or less.")
-        #     return redirect('update_info')
-        # if len(str(phone)) >10:
-        #     messages.error(request, "Social security number must be 10 characters or less.")
-        #     return redirect('update_info')
-
-        # Retrieve or create Informations object for the user
         user_info, created = Education.objects.get_or_create(user=user)
         
         # Update the fields
@@ -487,39 +521,84 @@ def edu_data(request):
     
 
 
-    
-    
-from .models import Medicaleducation  
-    
-from .forms import MedicaleducationForm
+def autocomplete_view(request):
+    return render(request, 'autocomplete.html')
 
-def update_info_Medicaleducation(request):
+
+# views.py
+from .forms import UserUpdateForm
+from .models import User
+
+
+
+def user_data(request, id):
+    user_instance = User.objects.get(id=id)
+    
+    if request.method == 'POST':
+        # Access submitted data from request.POST and update user_instance
+        if 'username' in request.POST:
+            user_instance.username = request.POST['username']
+        if 'last_name' in request.POST:
+            user_instance.last_name = request.POST['last_name']
+        if 'first_name' in request.POST:
+            user_instance.first_name = request.POST['first_name']
+        if 'email' in request.POST:
+            user_instance.email = request.POST['email']
+        if 'active' in request.POST:
+            user_instance.is_active = request.POST.get('active',False)
+        else:
+            # If 'active' is not present in request.POST, assume the user is inactive
+            user_instance.is_active = False
+
+
+
+        # Save the updated user_instance
+        user_instance.save()
+        
+        # Redirect to index or any other appropriate view after saving
+        return redirect('index')
+
+    context = {
+        "user_instance": user_instance,
+        "username":user_instance.username
+    }
+    return render(request, 'milestone2/user-details.html', context)
+
+
+
+def test(request):
+    return render(request, 'milestone2/Details.html')
+
+
+
+def update_info_Education(request):
     try:
-        user_info = Medicaleducation.objects.get(user=request.user)
-    except Medicaleducation.DoesNotExist:
+        user_info = Education.objects.get(user=request.user)
+    except Education.DoesNotExist:
         user_info = None
 
     if request.method == 'POST':
-        form = MedicaleducationForm(request.POST, instance=user_info)
+        form = EducationForm(request.POST, instance=user_info)
         if form.is_valid():
             user_info = form.save(commit=False)
             user_info.user = request.user
             user_info.save()
             return redirect('index')  # Redirect after saving
     else:
-        form = MedicaleducationForm(instance=user_info)
+        form = EducationForm(instance=user_info)
 
     context = {
         "user": request.user,
         'user_info': user_info,
         "form": form,
+        "STATES": STATES,
         "COUNTRY_CHOICES":COUNTRY_CHOICES,
         "DEGREE_CHOICES":DEGREE_CHOICES
     }
-    return render(request, 'milestone2/education/update_info_Medicaleducation.html', context)
+    return render(request, 'milestone2/update_info_Education.html', context)
 
 
-def update_data_Medicaleducation(request):
+def update_data_Education(request):
     if request.method == 'POST':
         # Retrieve the form data
         institution = request.POST.get('institution')
@@ -541,15 +620,15 @@ def update_data_Medicaleducation(request):
         
         if len(str(phone)) > 10:
             messages.error(request, "Social security number must be 10 characters.")
-            return redirect('update_info_Medicaleducation')
+            return redirect('update_info_Education')
         if len(str(zip_code)) >5:
             messages.error(request, "Zip Code must be 5 characters.")
-            return redirect('update_info_Medicaleducation')
+            return redirect('update_info_Education')
 
   
 
         # Retrieve or create Informations object for the user
-        user_info, created = Medicaleducation.objects.get_or_create(user=user)
+        user_info, created = Education.objects.get_or_create(user=user)
         # Update the fields
         user_info.institution = institution
         user_info.degreeaw = degreeaw
@@ -567,23 +646,17 @@ def update_data_Medicaleducation(request):
 
         user_info.save()
 
-        form = MedicaleducationForm(request.POST, instance=request.user)
+        form = EducationForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
 
         messages.success(request, 'Successfully updated!')
         # Redirect to a success page or any other desired page
-        return redirect('update_info_Medicaleducation')
+        return redirect('update_info_Education')
     else:
         # Handle cases where the request method is not POST
         return redirect('index')
     
-    
-    
-    
-from .models import gschool  
-    
-from .forms import gschoolForm
 
 def update_info_gschool(request):
     try:
@@ -605,10 +678,11 @@ def update_info_gschool(request):
         "user": request.user,
         'user_info_gschool': user_info_gschool,
         "form": form,
+        "STATES": STATES,
         "COUNTRY_CHOICES":COUNTRY_CHOICES,
         "DEGREE_CHOICES":DEGREE_CHOICES
     }
-    return render(request, 'milestone2/education/update_info_gschool.html', context)
+    return render(request, 'milestone2/update_info_gschool.html', context)
 
 
 def update_data_gschool(request):
@@ -670,35 +744,94 @@ def update_data_gschool(request):
         # Handle cases where the request method is not POST
         return redirect('index')
 
-def autocomplete_view(request):
-    return render(request, 'autocomplete.html')
+def update_info_Medicaleducation(request):
+    # try:
+    #     user_info = Medicaleducation.objects.get(user=request.user)
+    # except Medicaleducation.DoesNotExist:
+    #     user_info = None
 
+    user_info_queryset = Medicaleducation.objects.filter(user=request.user)
+    if user_info_queryset.exists():
+        user_info = user_info_queryset.first()  # ose bëni diçka tjetër me queryset sipas rastit
+    else:
+        user_info = None
 
-
-
-from django.shortcuts import render, redirect
-from .forms import UserForm
-from .models import User
-
-def user_data(request, id):
-    user = User.objects.get(id=id)
     if request.method == 'POST':
-        form = UserForm(request.POST, instance=user)
+        form = MedicaleducationForm(request.POST, instance=user_info)
+        if form.is_valid():
+            user_info = form.save(commit=False)
+            user_info.user = request.user
+            user_info.save()
+            return redirect('index')  # Redirect after saving
+    else:
+        form = MedicaleducationForm(instance=user_info)
+
+    context = {
+        "user": request.user,
+        'user_info': user_info,
+        "form": form,
+        "STATES": STATES,
+        "COUNTRY_CHOICES":COUNTRY_CHOICES,
+        "DEGREE_CHOICES":DEGREE_CHOICES
+    }
+    return render(request, 'milestone2/update_info_Medicaleducation.html', context)
+
+
+def update_data_Medicaleducation(request):
+    if request.method == 'POST':
+        # Retrieve the form data
+        institution = request.POST.get('institution')
+        degreeaw = request.POST.get('degreeaw')
+        degree = request.POST.get('degree')
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        state = request.POST.get('state')
+        zip_code = request.POST.get('zip')
+        country = request.POST.get('country')
+        phone = request.POST.get('phone')
+        start = request.POST.get('start')
+        end = request.POST.get('end')
+        graduated = request.POST.get('graduated')
+        date_of_graduation = request.POST.get('date')
+
+        # Get the current user
+        user = request.user
+        
+        if len(str(phone)) > 10:
+            messages.error(request, "Social security number must be 10 characters.")
+            return redirect('update_info_Medicaleducation')
+        if len(str(zip_code)) >5:
+            messages.error(request, "Zip Code must be 5 characters.")
+            return redirect('update_info_Medicaleducation')
+
+  
+
+        # Retrieve or create Informations object for the user
+        user_info, created = Medicaleducation.objects.get_or_create(user=user)
+        # Update the fields
+        user_info.institution = institution
+        user_info.degreeaw = degreeaw
+        user_info.degree = degree
+        user_info.address = address
+        user_info.city = city
+        user_info.state = state
+        user_info.zip = zip_code
+        user_info.country = country
+        user_info.phone = phone
+        user_info.start = start
+        user_info.end = end
+        user_info.graduated = graduated
+        user_info.date = date_of_graduation
+
+        user_info.save()
+
+        form = MedicaleducationForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('user-data', id=id)
+
+        messages.success(request, 'Successfully updated!')
+        # Redirect to a success page or any other desired page
+        return redirect('update_info_Medicaleducation')
     else:
-        form = UserForm(instance=user)
-    context = {
-        'form': form,
-    }
-    return render(request, 'milestone2/user-details.html', context)
-
-
-
-
-
-
-
-def test(request):
-    return render(request, 'milestone2/Details.html')
+        # Handle cases where the request method is not POST
+        return redirect('index')

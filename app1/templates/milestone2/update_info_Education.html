@@ -1,0 +1,149 @@
+{% extends 'milestone2/base.html' %}
+{% load static %}
+
+{% block title %} Education Form {% endblock %}
+
+{% block table  %} 
+<div class="container">
+    <div class="table-container">
+        <form method="post" action="{% url 'update_data_Education' %}">
+            {% csrf_token %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        {% if message.tags == "error" %}
+                            <li class="alert alert-danger">{{ message }}</li>
+                        {% else %}
+                            <li class="alert alert-success">{{ message }}</li>
+                        {% endif %}    
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <div class="table-container">
+                <form>
+                    <h1 class="personal-info-header">Education</h1>
+                    <div class="form-row">
+                        <div class="input-container">
+                            <label for="institution"><i class="fas fa-school"></i> Institution:</label>
+                            <input type="text" class="profile-input" id="institution" name="institution" value="{{ user_info.institution }}">
+                        </div>
+                        <div class="input-container">
+                            <label for="degreeaw" class="profile-label"><i class="fas fa-graduation-cap"></i> Degreeaw:</label>
+                            <select class="profile-input" id="degreeaw" name="degreeaw">
+                                {% for value, label in DEGREE_CHOICES %}
+                                <option value="{{user_info.degreeaw}}" selected>{{user_info.degreeaw}}</option>
+                                {% for v in label %}
+                                <option value="{{ v.1 }}">
+                                    {{ v.1 }}
+                                </option>
+                                {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container">
+                            <label for="degree" class="profile-label"><i class="fas fa-graduation-cap"></i> Degree:</label>
+                            <select class="profile-input" id="degree" name="degree">
+                                {% for value, label in DEGREE_CHOICES %}
+                                <option value="{{user_info.degree}}" selected>{{user_info.degree}}</option>
+                                {% for v in label %}
+                                <option value="{{ v.1 }}">
+                                    {{ v.1 }}
+                                </option>
+                                {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="input-container">
+                            <label for="address"><i class="fas fa-map-marker-alt"></i> Address:</label>
+                            <input type="text" class="profile-input" id="address" name="address" value="{{ user_info.address }}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container">
+                            <label for="city"><i class="fas fa-city"></i> City:</label>
+                            <input type="text" class="profile-input" id="city" name="city" value="{{ user_info.city }}">
+                        </div>
+                        <div class="input-container">
+                            <label for="state" class="profile-label"><i class="fas fa-map-marker-alt"></i> State:</label>
+                            <select class="profile-input" id="state" name="state">
+                                <option value="">Choose a state</option>
+                                {% for state_code, state_name in STATES %}
+                                    <option value="{{ state_code }}" {% if user_info.state == state_code %} selected {% endif %}>
+                                        {{ state_name }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container">
+                            <label for="zip"><i class="fas fa-map-marker-alt"></i> Zip Code:</label>
+                            <input type="text" class="profile-input" id="zip" name="zip" value="{{ user_info.zip }}">
+                        </div>
+                        <div class="input-container">
+                            <label for="country" class="profile-label"><i class="fas fa-globe"></i> Country:</label>
+                            <select class="profile-input" id="country" name="country">
+                                {% for value, label in COUNTRY_CHOICES %}
+                                <option value="{{user_info.country}}" selected>{{user_info.country}}</option>
+                                {% for v in label %}
+                                <option value="{{ v.1 }}">
+                                    {{ v.1 }}
+                                </option>
+                                {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container">
+                            <label for="phone"><i class="fas fa-phone"></i> Phone:</label>
+                            <input type="text" class="profile-input" id="phone" name="phone" value="{{ user_info.phone }}">
+                        </div>
+                        <div class="input-container">
+                            <label for="start"><i class="far fa-calendar-alt"></i> Start Date:</label>
+                            <input type="date" class="profile-input" id="start" name="start" value="{{ user_info.start|date:'Y-m-d' }}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container">
+                            <label for="end"><i class="far fa-calendar-alt"></i> End Date:</label>
+                            <input type="date" class="profile-input" id="end" name="end" value="{{ user_info.end|date:'Y-m-d' }}">
+                        </div>
+                        <div class="input-container">
+                            <label for="graduated" class="profile-label"><i class="fas fa-graduation-cap"></i> Graduated:</label>
+                            <select class="profile-input" id="graduated" name="graduated">
+                                {% for value, label in DEGREE_CHOICES %}
+                                <option value="{{user_info.graduated}}" selected>{{user_info.graduated}}</option>
+                                {% for v in label %}
+                                <option value="{{ v.1 }}">
+                                    {{ v.1 }}
+                                </option>
+                                {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        <div class="input-container">
+                            <label for="date"><i class="far fa-calendar-alt"></i> Date of Graduation:</label>
+                            
+                            <input type="date" class="profile-input" id="date" name="date" value="{{ user_info.date|date:'Y-m-d' }}">
+                        </div>
+                        <div class="input-container">
+                         
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-row">
+                        <button type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

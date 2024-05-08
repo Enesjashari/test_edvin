@@ -5,11 +5,7 @@
 
 {% block table  %} 
 <section class="middle">
-    <div class="">
-        <a href="details.html" class="button-link"><button type="submit">Personal Information</button></a>
-    </div>
-    
-
+    {% if logged_in_user.username == 'django' %}
     <div class="table-container">
         <table>
             <h2>Welcome </h2>
@@ -29,32 +25,39 @@
                     <th>Last Login</th>
                 </tr>
             </thead>
-            <tbody id="tableHeader">
+            <tbody id="tableBody">
                 {% for user in users %}
-                <tr>
-                    <a href="{% url 'user-data' user.id %}">
-                        <td>{{ user.id }}</td>
-                        <td>{{ user.first_name }}</td>
-                        <td>{{ user.last_name }}</td>
-                        <td>{{ user.username }}</td>
-                        <td>{{user.email}}</td>
-                        {% if user.is_active %}
-                            <td class="success">Active</td>
-                        {% else %}
-                            <td class="danger">Inactive</td>
-                        {% endif %}
-                        {% if user.last_login %}
-                            <td>{{ user.last_login|date:"F j, Y, g:i a" }}</td>
-                        {% else %}
-                            <td class="danger">Never</td>
-                        {% endif %}
-                    </a>
+                <tr data-href="{% url 'user-data' user.id %}">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    {% if user.is_active %}
+                    <td class="success">Active</td>
+                    {% else %}
+                    <td class="danger">Inactive</td>
+                    {% endif %}
+                    {% if user.last_login %}
+                    <td>{{ user.last_login|date:"F j, Y, g:i a" }}</td>
+                    {% else %}
+                    <td class="danger">Never</td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll("tr[data-href]");
+            rows.forEach(function (row) {
+                row.addEventListener("click", function () {
+                    window.location.href = this.getAttribute("data-href");
+                });
+            });
+        });
+    </script>
+    {% endif %}
 </section>
-
-     
 {% endblock %}

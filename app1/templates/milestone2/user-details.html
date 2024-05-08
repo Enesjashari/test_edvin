@@ -1,71 +1,168 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .profile-photo {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto;
-        }
-    </style>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-4">
-                <!-- Left Column -->
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" placeholder="Enter First Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter Email">
-                </div>
-                <!-- Add more fields as needed -->
+<!-- milestone2/user-details.html -->
+{% extends 'milestone2/base.html' %}
+{% load static %}
+{% block title %} Medical Education {% endblock %}
+
+{% block table %}
+<section class="middle">
+            
+    <div class="profile-container">
+        <form class="profile-form">
+            <div class="profile-image">
+                <!-- Your profile image goes here -->
+                <img src="{% static 'assets\img\green-logo.png' %}" alt="Profile Image">
             </div>
-            <div class="col-md-4">
-                <!-- Middle Column (Profile Photo) -->
-                <div class="profile-photo">
-                    <img src="user_photo.jpg" alt="User Photo" class="img-fluid">
-                </div>
+            <div class="form-row">
+            <div class="input-group">
+                <label for="username" class="profile-label"><i class="fas fa-user"></i> Username </label>
+                <input type="text" id="username" name="username" class="profile-input" placeholder="{{username}}">
             </div>
-            <div class="col-md-4">
-                <!-- Right Column -->
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" placeholder="Enter Last Name">
-                </div>
-                <div class="form-group">
-                    <label for="isActive">Is Active</label>
-                    <select class="form-control" id="isActive">
-                        <option value="active">Active</option>
-                        <option value="inactive">Inactive</option>
-                    </select>
-                </div>
-                <!-- Add more fields as needed -->
             </div>
-        </div>
+            <div class="form-row">
+            <div class="input-group">
+                <label for="last-name" class="profile-label"> <i class="fas fa-user"></i> Name Surname</label>
+                <input type="text" id="last-name" name="last-name" class="profile-input" placeholder="{{user_instance.first_name}} {{user_instance.last_name}}">
+            </div>
+            </div>
+            <div class="form-row">
+            <div class="input-group">
+                <label for="email" class="profile-label"><i class="fas fa-envelope"></i> Email Address </label>
+                <input type="email" id="email" name="email" class="profile-input" placeholder="{{user_instance.email}}">
+            </div>
+            </div>
+            <div class="form-row">
+            <div class="input-group">
+                <label for="is-active" class="profile-label"><i class="fas fa-toggle-on"></i> Is Active </label>
+                <select id="is-active" name="is-active" class="profile-input">
+                    {% if user_instance.first_name == True %}
+                    <option value="Yes">Yes</option>
+                    {% else %}
+                    <option value="No">No</option>
+                    {% endif %}
+                </select>
+            </div>
+            </div>
+            
+        </form>
     </div>
+    
+    
+    
+    <div class="form-container">
+        <form method="post" action="{% url 'user-data' id=user_instance.id %}" >
+            {% csrf_token %}
+            <h1 class="personal-info-header">User Details</h1>
+      
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="password"><i class="fas fa-lock"></i> Password </label>
+                    <input type="password" id="password" name="password" placeholder="Enter Password">
+                </div>
+                <div class="input-group">
+                    <label for="last-login"><i class="fas fa-clock"></i> Last Login </label>
+                    <input type="date" id="last-login" name="last-login">
+                </div>
+            
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="superuser"> Superuser Status<input style="width: 10px;  background-color: rgb(255, 255, 255);" type="checkbox" id="superuser" name="superuser"> Designates that this user has all Permissions without explicitly assigning them.</label>
+          
+                </div>
+                <div class="input-group">
+                    <label for="groups"><i class="fas fa-users"></i> Groups - The groups this user belongs to. A user will get all permissions granted to each of their groups. </label>
+                    <input type="text" id="groups" name="groups" list="group-list" placeholder="Select Group">
+                    <datalist id="group-list">
+                        <option value="Group 1">
+                        <option value="Group 2">
+                        <option value="Group 3">
+                    </datalist>
+                </div>
+              
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="username"><i class="fas fa-user"></i> User Permissions </label>
+                    <input type="text" id="groups" name="groups" list="permissions" placeholder="Specific permissions for this user">
+                    <datalist id="permissions">
+                        <option value="Administration | log entry | Can add log entry">
+                        <option value="Administration | log entry | Can change log entry">
+                        <option value="Administration | log entry | Can delete log entry">
+                        <option value="Administration | log entry | Can view log entry">
+                    </datalist>
+                </div>
+                <div class="input-group">
+                    <label for="username"><i class="fas fa-user"></i> Username </label>
+                    <input type="text" id="username" name="username" placeholder="Enter Username" value="{{username}}">
+                </div>
+                
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="first-name"><i class="fas fa-user"></i> First Name </label>
+                    <input type="text" id="first_name" name="first_name" placeholder="Enter First Name"  value="{{user_instance.first_name}}" >
+                </div>
+                <div class="input-group">
+                    <label for="last-name"> <i class="fas fa-user"></i> Last Name</label>
+                    <input type="text" id="last_name" name="last_name" placeholder="Enter Last Name" value="{{user_instance.last_name}}">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="email"><i class="fas fa-envelope"></i> Email Address </label>
+                    <input type="email" id="email" name="email" placeholder="Enter Email Address" value="{{user_instance.email}}">
+                </div>
+              <div class="input-group checkbox-group">
+                    <label for="staff">Staff Status  <input style="width: 10px;  background-color: rgb(255, 255, 255);"type="checkbox" id="staff" name="staff"> Designates whether the user can log into this admin site</label>
+                  
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    
+                    <label for="active">
+                        Active
+                        <input style="width: 10px;  background-color: rgb(255, 255, 255);"  type="checkbox" id="active" name="active"  {% if user_instance.is_active %}checked{% endif %} value="True">
+                        Designates whether the user can log into this admin site
+                    </label>                 
+                </div>
+                <div class="input-group">
+                    <label for="date-joined"><i class="far fa-calendar-alt"></i> Date Joined </label>
+                    <input  type="datetime-local" id="date-joined" name="date-joined">
+                </div>
+            </div>
+          
+            <div class="form-row">
+                <button type="submit" class="btn-submit">Save</button>
+            </div>
+        </form>
+                
+        
+    </div>
+</section>
+<!-- END OF MIDDLE -->
 
-
-
-    <h1>User Details</h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
-    </form>
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- END OF RIGHT -->
+</main>
+<!-- END OF ASIDE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>
+{% endblock %}
+<!-- <section class="middle">
+    <div class="profile-container">
+        <form class="profile-form" method="POST" action="{% url 'user-data' id=user_instance.id %}">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="form-row">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <span class="error">{{ field.errors }}</span>
+                {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn-submit">Save</button>
+        </form>
+    </div>
+</section> -->
