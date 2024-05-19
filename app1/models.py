@@ -96,8 +96,15 @@ BOOLEAN_CHOICES = [
 ]
 
 
+def user_images_path(instance, filename, subdirectory):
+    return f'images/{subdirectory}/user_{instance.user.id}/{filename}'
+
+def profile_picture_path(instance, filename):
+    return user_images_path(instance, filename, 'profile_pictures')
+
 class Informations(models.Model):
     user=models.OneToOneField(User,on_delete=models.CASCADE ,db_column="User")
+    profile_picture = models.ImageField(upload_to=profile_picture_path, blank=True, null=True)
     preffix=models.CharField(max_length = 20,blank=True,default='',choices=DEGREE_CHOICES, verbose_name='Preffix',db_column="Prefix")
     suffix=models.CharField(max_length = 20,default='',choices=DEGREE_CHOICES, verbose_name='Suffix',db_column="Sufix")
     socialsecuritynumber = models.CharField(max_length=10,blank = True,  verbose_name='Social Security Number',db_column="Social Security Number")
@@ -147,7 +154,7 @@ class Education(models.Model):
     degree = models.CharField(max_length=20,null = True, choices=DEGREE_CHOICES,  verbose_name='Degree',db_column="Degree")
     address = models.CharField(max_length=20,null = True,  verbose_name='Address',db_column="Address")
     city = models.CharField(max_length=20,null = True,  verbose_name='City',db_column="City")
-    state = models.CharField(max_length=20,null = True,  verbose_name='State',db_column="State")
+    state = models.CharField(max_length=20,null = True,choices=COUNTRY_CHOICES ,  verbose_name='State',db_column="State")
     zip = models.CharField(max_length=5,null = True,  verbose_name='Zip Code',db_column="ZCode")
     country = models.CharField(max_length = 100,blank=True ,null=True, verbose_name='Country',db_column="Country")
     phone = models.CharField(max_length=10,null = True,  verbose_name='Phone',db_column="Phone")
@@ -448,19 +455,6 @@ class Licencesnotherexams(models.Model):
         return self.user.username
 
 
-class Address(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    street_number = models.CharField(max_length=255, blank=True, null=True,db_column="Street Number")
-    route = models.CharField(max_length=255, blank=True, null=True,db_column="Route")
-    locality = models.CharField(max_length=255, blank=True, null=True,db_column="Locality")
-    administrative_area_level_1 = models.CharField(max_length=255, blank=True, null=True,db_column="Administrative Area L1")
-    postal_code = models.CharField(max_length=20, blank=True, null=True,db_column="Postal Code")
-    country = models.CharField(max_length=255, blank=True, null=True,db_column="Country")
-
-    def __str__(self):
-        return f"{self.street_number}, {self.route}, {self.locality}, {self.administrative_area_level_1}, {self.postal_code}, {self.country}"
-
-
 class hospitals(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE )
     hospitalid = models.CharField(max_length=20,null = True, default='', verbose_name='Hospital ID',db_column="Hospital ID")
@@ -500,3 +494,19 @@ class Agreements(models.Model):
     
     def __str__(self):
         return self.user.username
+    
+
+class UserProfile(models.Model):
+    STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Verified', 'Verified'),
+        ('Unverified', 'Unverified'),
+    ]
+    
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
+        return self.user.username
+
+

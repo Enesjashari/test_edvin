@@ -5,33 +5,34 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block  title %} Homepage {% endblock %}</title>
+        <title>{% block title %}  {% endblock %}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
         <link rel="stylesheet" href="{% static 'assets/css/style1.css' %}">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        <script type="text/javascript" src="{% static 'assets/js/jquery.min.js' %}"></script>
-        <!-- <script async defer type="text/javascript" src="{% static 'assets/js/autocomplete.js' %}"></script> -->
+        
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
         <nav>
             <div class="container">
-                <h1>Green Technologies</h1>
+                <a href="{% url 'index' %}">
+                    <img src="{% static 'assets/img/green-logo.png' %}" width="65px" height="65px" alt="">
+                </a>
+                
+                <!-- <h1>Logo</h1> -->
                 
                 <div class="links">
                   
                     <a href="{% url 'index' %}">Home</a>
                     <a href="#">About Us</a>
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'logout' %}">Logout</a>
-                    {% else %}
-                        <a href="{% url 'login' %}">Login</a>
-                    {% endif %}
+                
+               
                 </div>
              
                 <div class="profile-area">
+                    
                     <button id="menu-btn">
                         <span class="material-icons">menu</span>
                     </button>
@@ -42,158 +43,261 @@
                                 </span>
                     </div>
                     
-                    <div class="profile">
+              
+                <div class="profile">
                         <div class="profile-photo">
-                            <img src="{% static 'assets/img/green-logo.png' %}" alt="Profile Photo">
+                            <img src="{% static 'assets\img\green-logo.png' %}" alt="Profile Photo">
                         </div>
-                        {% if user.is_authenticated %}
-                            <h5>{{ user.username }}</h5>
-                        {% endif %}    
-                        <span class="material-icons">
+                        <h3>{{user.first_name}} {{user.last_name}}</h3>
+                        <span class="material-icons dropdown-toggle">
                             expand_more
-                            </span>
+                        </span>
+                        <div class="dropdown-content text-center ">
+                            <!-- Dropdown content goes here -->
+                            <img class="smaller"src="{% static 'assets\img\green-logo.png' %}" alt="Profile Photo">
+                            <a href="#">Speciality</a>
+                            <a href="setting.html">Profile</a>
+                            <a href="#">Setting</a>
+                            <a href="{% url 'logout' %}">Log out</a>
+                        </div>
                     </div>
-                  
+             
                 </div>
             </div>
         </nav>
         <!-- END OF NAVBAR -->
         <main>
             <aside>
-<button id="close-btn">
-    <span class="material-icons">close</span>
-</button>
-<div class="sidebar">
-    <div class="search-bar">
-        <input type="search" placeholder="Search">
-        <button type="button">
-            <span class="material-icons">search</span>
-        </button>
-    </div>
-    <br>
-    <a href="{% url 'index' %}" class="active">
-        <span class="material-icons">dashboard</span>
-        <h4>Dashboard</h4>
-    </a>
-    <div class="dropdown">
-        <a href="#" class="dropbtn">
-            <span class="material-icons">data_usage</span>
-            <h4>Information</h4>
-        </a>
-        <div class="dropdown-content">
-            <a href="{% url 'personal-info' %}">Personal</a>
-            <a href="{% url 'update_info_Education' %}" class="sidebar-link  " >Education</a>
-            <a href="{% url 'update_info_gschool' %}" class="sidebar-link  " >Graduate School</a>
-            <a href="{% url 'update_info_Medicaleducation' %}" class="sidebar-link  " >Medical Education</a>
-        </div>
-    </div>
-    <!-- <a href="#">
-        <span class="material-icons">currency_exchange</span>
-        <h4>Exchange</h4>
-    </a>
-    <a href="#">
-        <span class="material-icons">account_balance_wallet</span>
-        <h4>Wallet</h4>
-    </a>
-    <a href="#">
-        <span class="material-icons">payment</span>
-        <h4>Transactions</h4>
-    </a> -->
-    <a href="#">
-        <span class="material-icons">pie_chart</span>
-        <h4>Analytics</h4>
-    </a>
-    <a href="#">
-        <span class="material-icons">chat</span>
-        <h4>Messages</h4>
-    </a>
-    <a href="#">
-        <span class="material-icons">help_center</span>
-        <h4>Help Center</h4>
-    </a>
-    <a href="#">
-        <span class="material-icons">settings</span>
-        <h4>Settings</h4>
-    </a>
-    <br>
-    <div class="sidebar-footer">
-        <div class="profile">
-            <div class="profile-photo">
-                <img src="{% static 'assets/img/green-logo.png' %}" alt="Profile Photo">
-            </div>
-            <h5>{{ user.username }}</h5>
-                       
-        </div>
-</div>
+                <button id="close-btn">
+                    <span class="material-icons">close</span>
+                </button>
+                <div class="sidebar">
+                    <div class="search-bar">
+                        <input type="search" placeholder="Search">
+                        <button type="button">
+                            <span class="material-icons">search</span>
+                        </button>
+                    </div>
+                    <br>
+                    <a href="{% url 'index' %}" class="active">
+                        <span class="material-icons">dashboard</span>
+                        <h4>Dashboard</h4>
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="dropbtn ">
+                            <span class="material-icons">data_usage</span>
+                            <h4>Information</h4>
+                        </a>
+                        <div class="dropdown-content">
+                            <a href="{% url 'personal-info' %}">
+                                <span class="fa fa-flag flag-green"></span> Personal
+                            </a>
+                            {% if edu_percentage_filled >= 4 %}
+                            <a href="{% url 'update-edu' %}">
+                                <span class="fa fa-flag flag-red"></span>{{edu_percentage_filled}} Education
+                            </a>
+                            {% elif edu_percentage_filled >= 2 %}
+                            <a href="{% url 'update-edu' %}">
+                                <span class="fa fa-flag flag-orange"></span>{{edu_percentage_filled}} Education
+                            </a>
+                            {% else %}
+                            <a href="{% url 'update-edu' %}">
+                                <span class="fa fa-flag flag-green"></span>{{edu_percentage_filled}} Education
+                            </a>
+                            {% endif %}
 
+                            {% if medical_percentage_filled >= 4 %}
+                            <a href="{% url 'update_info_Education' %}">
+                                <span class="fa fa-flag flag-red"></span>{{medical_percentage_filled}} Medical Education
+                            </a>
+                            {% elif medical_percentage_filled >= 2 %}
+                            <a href="{% url 'update_info_Education' %}">
+                                <span class="fa fa-flag flag-orange"></span>{{medical_percentage_filled}} Medical Education
+                            </a>
+                            {% else %}
+                            <a href="{% url 'update_info_Education' %}">
+                                <span class="fa fa-flag flag-green"></span>{{medical_percentage_filled}} Medical Education
+                            </a>
+                            {% endif %}
 
-    </aside>
-          <!-- END OF ASIDE -->
+                            {% if gschool_percentage_filled >= 10 %}
+                            <a href="{% url 'update_info_gschool' %}">
+                                <span class="fa fa-flag flag-red"></span>{{gschool_percentage_filled}} Other Graduate School
+                            </a>
+                            {% elif gschool_percentage_filled >= 4 %}
+                            <a href="{% url 'update_info_gschool' %}">
+                                <span class="fa fa-flag flag-orange"></span>{{gschool_percentage_filled}} Other Graduate School
+                            </a>
+                            {% else %}
+                            <a href="{% url 'update_info_gschool' %}">
+                                <span class="fa fa-flag flag-green"></span>{{gschool_percentage_filled}} Other Graduate School
+                            </a>
+                            {% endif %}
 
-
-            <!-- END OF MIDDLE -->
+                            <a href="Profile.html">
+                                <span class="fa fa-flag flag-orange"></span> Profile
+                            </a>
+                        </div>
+                    </div>
+                    
+                   
+                    <a href="#">
+                        <span class="material-icons">chat</span>
+                        <h4>Messages</h4>
+                    </a>
+                    <a href="#">
+                        <span class="material-icons">help_center</span>
+                        <h4>Help Center</h4>
+                    </a>
+                    <a href="#">
+                        <span class="material-icons">settings</span>
+                        <h4>Settings</h4>
+                    </a>
+                    <br>
+                    <div class="sidebar-footer" style="padding-left: 30px;">
+                        <div class="profile">
+                            <div class="profile-photo">
+                                <img src="images/prfdefault.jpeg" alt="Profile Photo">
+                            </div>
+                            <h5>Albine Kqiku</h5>
+                            <div class="dropdown">
+                                <button onclick="toggleDropdown()" class="dropbtn"></button><span class="material-icons dropdown-toggle">
+                                    expand_more
+                                </span>
+                              
+                                <div id="myDropdown" class="dropdown-content text-center">
+                                        <!-- Dropdown content goes here -->
+                                        <img class="smaller"src="images/prfdefault.jpeg" alt="Profile Photo">
+                                        <a href="#">Speciality</a>
+                                        <a href="setting.html">Profile</a>
+                                        <a href="#">Setting</a>
+                                        <a href="#">Log out</a>
+                                    </div>
+                           
+                            
+                        </div>
+                   <!-- <div class="sidebar-footer">
+                        <div class="profile">
+                            <div class="profile-photo">
+                                <img src="./images/f.png" alt="Profile Photo">
+                            </div>
+                            <h5>Albine Kqiku</h5>
+                           
+                            
+                        </div>
+                    -->
+                </div>
+                </aside>
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+       const themeButton = document.querySelector('.theme-btn');
+       const sidebar = document.querySelector('aside');
+       const nav = document.querySelector('nav');
+    
+       function moveThemeButtonToSidebar() {
+           if (themeButton && sidebar && !sidebar.contains(themeButton)) {
+               sidebar.appendChild(themeButton);
+               sidebar.style.position = "absolute"; // Ensure sidebar has a position set
+               themeButton.style.position = "absolute"; // Position the theme button absolutely
+               themeButton.style.bottom = "20px"; // Adjust bottom spacing as needed
+               themeButton.style.left = "50%"; // Center the button horizontally
+               themeButton.style.transform = "translateX(-50%)"; // Center the button horizontally
+           }
+       }
+    
+       function toggleThemeButtonLocation() {
+           if (window.innerWidth < 768) {
+               moveThemeButtonToSidebar();
+           } else {
+               moveThemeButtonToNav();
+           }
+       }
+    
+       toggleThemeButtonLocation(); // Move the theme button on page load
+    
+       window.addEventListener('resize', function() {
+           toggleThemeButtonLocation(); // Move the theme button when the window is resized
+       });
+    });
+    
+                   </script>
+                
+                {% block table  %} 
+                {% endblock %}
            
-        {% block table  %} {% endblock %}
+              <!-- END OF RIGHT -->
         </main>
          <!-- END OF ASIDE -->
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   <script src="{% static 'assets/js/main1.js' %}"></script>
-   <script>
-    var placeSearch, autocomplete;
-
-    var componentForm = {
-      street_number: 'short_name',
-      route: 'long_name',
-      locality: 'long_name',
-      administrative_area_level_1: 'short_name',
-      country: 'long_name',
-      postal_code: 'short_name'
-    };
-
-    function initMap() {
-      autocomplete = new google.maps.places.Autocomplete(
-          document.getElementById('autocomplete'), {types: ['geocode']});
-
-      autocomplete.setFields(['address_component']);
-
-      autocomplete.addListener('place_changed', fillInAddress);
-    }
-
-    function fillInAddress() {
-      var place = autocomplete.getPlace();
-
-      for (var component in componentForm) {
-        document.getElementById(component).value = '';
-        document.getElementById(component).disabled = false;
-      }
-
-      for (var i = 0; i < place.address_components.length; i++) {
-        var addressType = place.address_components[i].types[0];
-        if (componentForm[addressType]) {
-          var val = place.address_components[i][componentForm[addressType]];
-          document.getElementById(addressType).value = val;
-        }
-      }
-    }
-
-    function geolocate() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-          var geolocation = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+         <script src="{% static 'assets/js/main1.js' %}"></script>
+         <script>
+          var placeSearch, autocomplete;
+      
+          var componentForm = {
+            street_number: 'short_name',
+            route: 'long_name',
+            locality: 'long_name',
+            administrative_area_level_1: 'short_name',
+            country: 'long_name',
+            postal_code: 'short_name'
           };
-          var circle = new google.maps.Circle(
-              {center: geolocation, radius: position.coords.accuracy});
-          autocomplete.setBounds(circle.getBounds());
-        });
-      }
-    }
-  </script>
-  <!-- JavaScript End -->
-  
-  <!-- Google API Start -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQPuaKc0ylzdaoxy-ou43GPiGgh80yZa0&libraries=places&callback=initMap" async defer></script>
-  <!-- Google API End -->
+      
+          function initMap() {
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('autocomplete'), {types: ['geocode']});
+      
+            autocomplete.setFields(['address_component']);
+      
+            autocomplete.addListener('place_changed', fillInAddress);
+          }
+      
+          function fillInAddress() {
+            var place = autocomplete.getPlace();
+      
+            for (var component in componentForm) {
+              document.getElementById(component).value = '';
+              document.getElementById(component).disabled = false;
+            }
+      
+            for (var i = 0; i < place.address_components.length; i++) {
+              var addressType = place.address_components[i].types[0];
+              if (componentForm[addressType]) {
+                var val = place.address_components[i][componentForm[addressType]];
+                document.getElementById(addressType).value = val;
+              }
+            }
+          }
+      
+          function geolocate() {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                var geolocation = {
+                  lat: position.coords.latitude,
+                  lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle(
+                    {center: geolocation, radius: position.coords.accuracy});
+                autocomplete.setBounds(circle.getBounds());
+              });
+            }
+          }
+        </script>
+        <!-- JavaScript End -->
+        
+        <!-- Google API Start -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQPuaKc0ylzdaoxy-ou43GPiGgh80yZa0&libraries=places&callback=initMap" async defer></script>
+        <!-- Google API End -->
+         <script>document.addEventListener("click", function(event) {
+            var dropdownToggle = document.querySelector(".dropdown-toggle");
+            var dropdownContent = document.querySelector(".dropdown-content");
+        
+            if (event.target === dropdownToggle) {
+                dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
+            } else {
+                dropdownContent.style.display = "none";
+            }
+        });</script>
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js" integrity="sha512-GMGzUEevhWh8Tc/njS0bDpwgxdCJLQBWG3Z2Ct+JGOpVnEmjvNx6ts4v6A2XJf1HOrtOsfhv3hBKpK9kE5z8AQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   <script src="{% static 'assets/js/main.js' %}"></script>
  </body>
 </html>

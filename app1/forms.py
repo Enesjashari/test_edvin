@@ -1,8 +1,8 @@
 # forms.py
 from django import forms
 from django.contrib.auth.models import User
-from .models import Address,gschool,Medicaleducation
-
+from .models import gschool,Medicaleducation
+from .models import UserProfile
 
 class UserUpdateForm(forms.ModelForm):
     class Meta:
@@ -60,11 +60,6 @@ class UserForm(forms.ModelForm):
         fields = "__all__"  # Add more fields as needed
 
 
-class AddressForm(forms.ModelForm):
-    class Meta:
-        model = Address
-        fields = '__all__'
-
 
 class EducationForm(forms.ModelForm):
     class Meta:
@@ -95,3 +90,9 @@ class MedicaleducationForm(forms.ModelForm):
     class Meta:
         model = Medicaleducation
         fields = '__all__'
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['status']

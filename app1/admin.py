@@ -1,7 +1,9 @@
+# admin.py
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Informations,Education,Agreements, hospitals,Medicaleducation,gschool,MedicalTraining,Residency,Fellowship,Preceptorship,Fifthpathway,Boardcertifications,Lifesupport,Licences,Dearegistration,Licencesnotherexams
 from django.contrib.auth.models import User
+from .models import Informations, Education, Agreements, hospitals, Medicaleducation, gschool, MedicalTraining, Residency, Fellowship, Preceptorship, Fifthpathway, Boardcertifications, Lifesupport, Licences, Dearegistration, Licencesnotherexams, UserProfile
+from .forms import UserProfileForm
 
 # Define your inline classes
 class AccountInline(admin.StackedInline):
@@ -18,7 +20,6 @@ class hospitalsinline(admin.StackedInline):
     model = hospitals
     can_delete = False
     verbose_name_plural = "Hospitals"
- 
 
 class EducationInline(admin.StackedInline):
     model = Education
@@ -47,7 +48,7 @@ class MedicaltrainingInline(admin.StackedInline):
 class ResidencyInline(admin.StackedInline):
     model = Residency
     can_delete = False
-    verbose_name_plural = "Reidency"
+    verbose_name_plural = "Residency"
     extra = 1
 
 class FellowshipInline(admin.StackedInline):
@@ -83,7 +84,7 @@ class LifesupportInline(admin.StackedInline):
 class LicencesInline(admin.StackedInline):
     model = Licences
     can_delete = False
-    verbose_name_plural = "Life Support/Other Certifications"
+    verbose_name_plural = "Licenses"
     extra = 1
 
 class DeaInline(admin.StackedInline):
@@ -98,10 +99,46 @@ class LicencesnotherexamsInline(admin.StackedInline):
     verbose_name_plural = "License/Other Exams"
     extra = 1
 
-# Register your inline classes
+# Inline for UserProfile
+class UserProfileInline(admin.StackedInline):
+    model = UserProfile
+    form = UserProfileForm
+    can_delete = False
+    verbose_name_plural = "User Profiles"
+
+# Extend UserAdmin to include your inlines
+class CustomUserAdmin(UserAdmin):
+    inlines = [
+        UserProfileInline,
+        AccountInline,
+        EducationInline,
+        MeducationInline,
+        GschoolInline,
+        MedicaltrainingInline,
+        ResidencyInline,
+        Agreementsinline,
+        FellowshipInline,
+        hospitalsinline,
+        PreceptorshipInline,
+        FifthpathwayInline,
+        BoardcertificationsInline,
+        LifesupportInline,
+        LicencesInline,
+        DeaInline,
+        LicencesnotherexamsInline,
+    ]
+
+# Unregister the default UserAdmin
+admin.site.unregister(User)
+
+# Register UserAdmin with your customizations
+admin.site.register(User, CustomUserAdmin)
+
+# Register your models if not already registered
 @admin.register(Informations)
 class InformationsAdmin(admin.ModelAdmin):
     pass
+
 @admin.register(Agreements)
 class AgreementsAdmin(admin.ModelAdmin):
     pass
@@ -158,13 +195,6 @@ class DearegistrationAdmin(admin.ModelAdmin):
 class LicencesnotherexamsAdmin(admin.ModelAdmin):
     pass
 
-# Extend UserAdmin to include your inlines
-class CustomUserAdmin(UserAdmin):
-    inlines = [AccountInline, EducationInline, MeducationInline,GschoolInline,MedicaltrainingInline,
-               ResidencyInline,AccountInline,Agreementsinline,FellowshipInline,hospitalsinline,PreceptorshipInline,FifthpathwayInline,BoardcertificationsInline,LifesupportInline,LicencesInline,DeaInline,LicencesnotherexamsInline]
-
-# Unregister the default UserAdmin
-admin.site.unregister(User)
-
-# Register UserAdmin with your customizations
-admin.site.register(User, CustomUserAdmin)
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'status')

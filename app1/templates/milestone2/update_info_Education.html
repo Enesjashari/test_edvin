@@ -67,13 +67,15 @@
                             <input type="text" class="profile-input" id="city" name="city" value="{{ user_info.city }}">
                         </div>
                         <div class="input-container">
-                            <label for="state" class="profile-label"><i class="fas fa-map-marker-alt"></i> State:</label>
+                            <label for="degree" class="profile-label"><i class="fas fa-graduation-cap"></i> State:</label>
                             <select class="profile-input" id="state" name="state">
-                                <option value="">Choose a state</option>
-                                {% for state_code, state_name in STATES %}
-                                    <option value="{{ state_code }}" {% if user_info.state == state_code %} selected {% endif %}>
-                                        {{ state_name }}
-                                    </option>
+                                {% for value, label in COUNTRY_CHOICES %}
+                                <option value="{{user_info.state}}" selected>{{user_info.state}}</option>
+                                {% for v in label %}
+                                <option value="{{ v.1 }}">
+                                    {{ v.1 }}
+                                </option>
+                                {% endfor %}
                                 {% endfor %}
                             </select>
                         </div>

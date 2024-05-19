@@ -90,3 +90,90 @@ function moveOptions(sourceSelect, targetSelect) {
 function selectAllOptions(selectElement) {
     Array.from(selectElement.options).forEach(option => option.selected = true);
 }
+function moveOptions(sourceSelect, targetSelect) {
+    const selectedOptions = Array.from(sourceSelect.selectedOptions);
+    selectedOptions.forEach(option => {
+        const newOption = document.createElement('option');
+        newOption.value = option.value;
+        newOption.textContent = option.textContent;
+        targetSelect.appendChild(newOption);
+        option.remove();
+    });
+}
+
+function selectAllOptions(selectElement) {
+    Array.from(selectElement.options).forEach(option => option.selected = true);
+}
+
+// Groups
+
+const addGroupButton = document.getElementById('addGroup');
+const removeGroupButton = document.getElementById('removeGroup');
+const availableGroupsSelect = document.getElementById('availableGroups');
+const selectedGroupSelect = document.getElementById('selectedGroups');
+const selectAllAvailableGroupsButton = document.getElementById('selectAllAvailableGroups');
+
+addGroupButton.addEventListener('click', function() {
+    moveOptions(availableGroupsSelect, selectedGroupSelect);
+});
+
+removeGroupButton.addEventListener('click', function() {
+    moveOptions(selectedGroupSelect, availableGroupsSelect);
+});
+
+selectAllAvailableGroupsButton.addEventListener('click', function() {
+    selectAllOptions(availableGroupsSelect);
+    moveOptions(availableGroupsSelect, selectedGroupSelect);
+});
+
+function moveOptions(sourceSelect, targetSelect) {
+    const selectedOptions = Array.from(sourceSelect.selectedOptions);
+    selectedOptions.forEach(option => {
+        const newOption = document.createElement('option');
+        newOption.value = option.value;
+        newOption.textContent = option.textContent;
+        targetSelect.appendChild(newOption);
+        option.remove();
+    });
+}
+
+function selectAllOptions(selectElement) {
+    Array.from(selectElement.options).forEach(option => option.selected = true);
+}
+
+// profile drowdown
+
+document.addEventListener("click", function(event) {
+    var dropdownToggle = document.querySelector(".dropdown-toggle");
+    var dropdownContent = document.querySelector(".dropdown-content");
+
+    if (event.target === dropdownToggle) {
+        dropdownContent.style.display = (dropdownContent.style.display === "block") ? "none" : "block";
+    } else {
+        dropdownContent.style.display = "none";
+    }
+});
+
+
+function toggleDropdown() {
+    var dropdown = document.getElementById("myDropdown");
+    if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+    } else {
+        dropdown.style.display = "block";
+        // Add an event listener to the document to close the dropdown when clicked outside of it
+        document.addEventListener('click', closeDropdownOutside);
+    }
+}
+
+function closeDropdownOutside(event) {
+    var dropdown = document.getElementById("myDropdown");
+    // Check if the clicked element is inside the dropdown or the button itself
+    if (!dropdown.contains(event.target) && !document.querySelector('.dropbtn').contains(event.target)) {
+        dropdown.style.display = "none";
+        // Remove the event listener after the dropdown is closed
+        document.removeEventListener('click', closeDropdownOutside);
+    }
+}
+
+

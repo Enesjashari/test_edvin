@@ -16,6 +16,12 @@ from django.contrib.auth import authenticate, login as auth_login
 from django.contrib.auth.decorators import login_required
 from .models import Informations,Education,gschool,Medicaleducation,STATES,COUNTRY_CHOICES
 from .forms import EducationForm,gschoolForm,MedicaleducationForm
+from .models import Informations
+from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
+from .models import Informations
+from .models import COUNTRY_CHOICES 
+from .models import Education  # Import your model class
 
 
 @login_required
@@ -48,15 +54,20 @@ def medical_education_info(request):
     return render(request, 'milestone2/medical_education.html', {'medical_education': medical_education})
 
 
-@login_required
+# @login_required
+from django.shortcuts import render, redirect
+from django.core.exceptions import ObjectDoesNotExist
+
 def graduate_school_info(request):
     try:
+        # Try to retrieve the gschool object associated with the user
         graduate_school = gschool.objects.get(user=request.user)
-    except gschool.DoesNotExist:
+    except ObjectDoesNotExist:
+        # If no gschool object exists for the user, create a new one
         graduate_school = gschool(user=request.user)
-        graduate_school.save()
 
     if request.method == 'POST':
+        # Update the attributes of the graduate_school object with the form data
         graduate_school.institution = request.POST.get('institution', '')
         graduate_school.degreeaw = request.POST.get('degreeaw', '')
         graduate_school.degree = request.POST.get('degree', '')
@@ -70,10 +81,14 @@ def graduate_school_info(request):
         graduate_school.end = request.POST.get('end', '')
         graduate_school.graduated = request.POST.get('graduated', '')
         graduate_school.date = request.POST.get('date', '')
+        # Save the updated or newly created graduate_school object
         graduate_school.save()
+        # Redirect to the same page after processing the form data
         return redirect('graduate-school-info')
     
+    # Render the graduate_school.html template with the graduate_school object
     return render(request, 'milestone2/graduate_school.html', {'graduate_school': graduate_school})
+
 
 
 @login_required
@@ -148,17 +163,123 @@ def education_info(request):
 
     return render(request, 'milestone2/education.html', {'education': education})
 
-#Provide the users for super admin 
-def index(request):
-    logged_in_user = request.user
-    users = User.objects.all()[1:]
-    logged_in_user = request.user
-    context = {
-        "logged_in_user": logged_in_user,
-        "users":users,
-    }
-    return render(request, "milestone2/index.html", context)
 
+
+# def calculate_percentage_filled():
+#     # Get total number of fields in the model
+#     total_fields = len(Education._meta.get_fields())  # Assuming MyModel is your model class
+    
+#     # Get number of filled fields in the model
+#     filled_fields = Education.objects.exclude(field_name__isnull=True).count()  # Replace field_name with actual field name
+    
+#     # Calculate percentage filled
+#     if total_fields > 0:
+#         percentage_filled = (filled_fields / total_fields) * 100
+#     else:
+#         percentage_filled = 0
+    
+#     return percentage_filled
+
+# Example usage:
+
+# def count(request):
+#         user_info = Education.objects.get(user=request.user)
+
+#         a1 = user_info.institution 
+#         a2 = user_info.degreeaw 
+#         a3 = user_info.degree 
+#         a4 = user_info.address 
+#         a5 = user_info.city 
+#         a6 = user_info.state
+#         a7 = user_info.zip
+#         a8 = user_info.country
+#         a9 = user_info.phone 
+#         a10 = user_info.start
+#         a11 = user_info.end
+#         a12 = user_info.graduated 
+#         a13 = user_info.date 
+
+#         lista = [a1,a2,a3,a4,a5,a6,a7, a8, a9 ,a10 ,a11 ,a12, a13]
+
+#         null_count = lista.count(None)
+
+#         return null_count
+
+# def count(request, model):
+#     user_info = model.objects.get(user=request.user)
+    
+#     # Get all fields of the model
+#     fields = model._meta.fields
+    
+#     # Count the number of null values for each field
+#     null_count = sum(1 for field in fields if getattr(user_info, field.name) is None)
+    
+#     return null_count
+
+def count(request, model):
+    user_info = model.objects.filter(user=request.user).first()  # Use filter() and first() instead of get()
+    
+    if user_info is None:
+        return 0
+    
+    # Get all fields of the model
+    fields = model._meta.fields
+    
+    # Count the number of null values for each field
+    # null_count = sum(1 for field in fields if getattr(user_info, field.name) is None)
+    null_count = sum(1 for field in fields if getattr(user_info, field.name) is None or (isinstance(getattr(user_info, field.name), str) and (getattr(user_info, field.name) == "" or getattr(user_info, field.name).isspace())))
+    return null_count
+
+
+def index(request):
+    if request.user.is_authenticated:
+
+        logged_in_user = request.user
+        users = User.objects.all()[1:]
+        logged_in_user = request.user
+
+        total_fields = 10 
+        
+
+        # filled_fields = Education.objects.filter(user=request.user).exclude(
+        #     degree__isnull=True,
+        #     institution__isnull=True,
+        #     start__isnull=True,
+        #     end__isnull=True
+        # ).count()
+        
+        # if total_fields > 0:
+        #     percentage_filled = (filled_fields / total_fields) * 100
+        # else:
+        #     percentage_filled = 0
+        
+        context = {
+            "logged_in_user": logged_in_user,
+            "edu_percentage_filled": count(request, Education),
+            "medical_percentage_filled": count(request, Medicaleducation),
+            "gschool_percentage_filled": count(request, gschool),
+            "users":users,
+        }
+        return render(request, "milestone2/index.html", context)
+    else:
+        return redirect('login')
+
+
+
+
+# def index(request):
+#     if request.user.is_authenticated:
+#         logged_in_user = request.user
+#         users = User.objects.all()[1:]
+#         logged_in_user = request.user
+        
+#         context = {
+#             "logged_in_user": logged_in_user,
+#             "users":users,
+#         }
+#         return render(request, "milestone2/index.html", context)
+#     else:
+#         return redirect('login')
 #Handle the registration,confirmation link via email
 def register(request):
     if request.method == "POST":
@@ -167,7 +288,7 @@ def register(request):
             messages.error(request, 'You must agree to the terms of service.')
             return redirect('register')
 
-        username = request.POST.get('username', '')
+        # username = request.POST.get('username', '')
         email = request.POST.get('email', '')
         password = request.POST.get('password', '')
         password2 = request.POST.get('password2', '')
@@ -176,13 +297,21 @@ def register(request):
         if password != password2:
             messages.error(request, 'Passwords do not match.')
             return redirect('login')
-            
-        if User.objects.filter(username=username).exists():
-            messages.error(request, 'Username is already taken.')
-            return redirect("login")
-        elif User.objects.filter(email=email).exists():
+        if User.objects.filter(email=email).exists():
             messages.error(request, 'Email is already registered.')
             return redirect('login')
+
+
+        # Generate a unique username
+        base_username = email.split('@')[0]
+        username = base_username
+        counter = 1
+        while User.objects.filter(username=username).exists():
+            username = f"{base_username}{counter}"
+            counter += 1
+        # if User.objects.filter(username=username).exists():
+        #     messages.error(request, 'Username is already taken.')
+        #     return redirect("login")
 
         user = User.objects.create_user(username=username, password=password, email=email)
         user.is_active = False
@@ -233,12 +362,6 @@ def confirm_email(request, uidb64, token):
         return redirect('login')
 
 
-# from .models import Updateinfo
-from .models import Informations
-from django.shortcuts import render, redirect
-from django.core.exceptions import ObjectDoesNotExist
-from .models import Informations
-from .models import COUNTRY_CHOICES 
 
 def update_info(request):
     try:
@@ -377,13 +500,22 @@ def update_data(request):
 #Handle the user login
 def login(request):
     if request.method == "POST":
-        username = request.POST.get('username', '')
+        identifier = request.POST.get('username', '')
         password = request.POST.get('password', '')
+        if '@' in identifier:
+            try:
+                user = User.objects.get(email=identifier)
+                username = user.username
+            except User.DoesNotExist:
+                username = None
+        else:
+            username = identifier
+            #Nice a bon edhe username edhe email ? popo dyjat /GG A ja boj push edhe shut down pc qe meniher
 
         user = authenticate(request, username=username, password=password)
         if user is not None:
             if user.is_active:
-                auth_login(request, user)  # Call the renamed login function
+                auth_login(request, user)
                 return redirect('index')
             else:
                 messages.error(request, 'Please confirm your email address first.')
@@ -393,7 +525,6 @@ def login(request):
             return redirect('login')
 
     return render(request, 'authentication/login.html')
-
 
 #Does the logout of user
 def logout(request):
@@ -462,7 +593,7 @@ def update_edu(request):
         "COUNTRY_CHOICES": COUNTRY_CHOICES,
         "DEGREE_CHOICES": DEGREE_CHOICES,
     }
-    return render(request, 'milestone2/education/update_edu.html', context)
+    return render(request, 'milestone2/update_info_Education.html', context)
 
 
 from .forms import UserUpdateForm
@@ -485,6 +616,7 @@ def edu_data(request):
         end = request.POST.get('end')  # Provide a default value if the field is empty
         graduated = request.POST.get('graduated')  # Provide a default value if the field is empty
         date = request.POST.get('date')  # Provide a default value if the field is empty
+        state = request.POST.get('state')  # Provide a default value if the field is empty
     
         # Get the current user
         user = request.user
@@ -496,6 +628,7 @@ def edu_data(request):
         user_info.degree = degree
         user_info.address = address
         user_info.city = city
+        user_info.state = state
         user_info.zip = zip
         user_info.country = country
         user_info.phone = phone
@@ -531,38 +664,57 @@ from .models import User
 
 
 
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
+from .models import UserProfile
+
+# views.py
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
+from .models import UserProfile
+
 def user_data(request, id):
-    user_instance = User.objects.get(id=id)
+    user_instance = get_object_or_404(User, id=id)
+    user_profile, created = UserProfile.objects.get_or_create(user=user_instance)
     
     if request.method == 'POST':
-        # Access submitted data from request.POST and update user_instance
-        if 'username' in request.POST:
-            user_instance.username = request.POST['username']
-        if 'last_name' in request.POST:
-            user_instance.last_name = request.POST['last_name']
-        if 'first_name' in request.POST:
-            user_instance.first_name = request.POST['first_name']
-        if 'email' in request.POST:
-            user_instance.email = request.POST['email']
-        if 'active' in request.POST:
-            user_instance.is_active = request.POST.get('active',False)
-        else:
-            # If 'active' is not present in request.POST, assume the user is inactive
-            user_instance.is_active = False
-
-
-
-        # Save the updated user_instance
-        user_instance.save()
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        active = request.POST.get('active', False)
+        status = request.POST.get('status')
         
-        # Redirect to index or any other appropriate view after saving
-        return redirect('index')
+        if username:
+            user_instance.username = username
+        if email:
+            user_instance.email = email
+        user_instance.is_active = bool(active)
+
+        if status:
+            user_profile.status = status
+
+        try:
+            user_instance.save()
+            user_profile.save()
+            return redirect('index')
+        except Exception as e:
+            context = {
+                "user_instance": user_instance,
+                "user_profile": user_profile,
+                "status_choices": UserProfile.STATUS_CHOICES,
+                "error": str(e)
+            }
+            return render(request, 'milestone2/user-details.html', context)
 
     context = {
         "user_instance": user_instance,
-        "username":user_instance.username
+        "user_profile": user_profile,
+        "status_choices": UserProfile.STATUS_CHOICES,
     }
     return render(request, 'milestone2/user-details.html', context)
+
+
+
+
 
 
 
@@ -835,3 +987,7 @@ def update_data_Medicaleducation(request):
     else:
         # Handle cases where the request method is not POST
         return redirect('index')
+    
+
+
+

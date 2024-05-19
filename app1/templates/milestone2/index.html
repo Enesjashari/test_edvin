@@ -1,18 +1,17 @@
 {% extends 'milestone2/base.html' %}
 {% load static %}
 
-{% block title %} Homepage {% endblock %}
+{% block title %} Locum Tenet {% endblock %}
 
 {% block table  %} 
 <section class="middle">
-    {% if logged_in_user.username == 'django' %}
+    {% if logged_in_user.username == 'django' or logged_in_user.email == 'django' or logged_in_user.username == 'django@gmail.com' %}
     <div class="table-container">
         <table>
-            <h2>Welcome </h2>
-            <h1>Clients Dashboard</h1>
-            <h5>festim.osmani@gmail.com </h5>
-            <hr>
-            <h3>User Information </h3>
+            <!-- <h2 class="text-center" > Welcome </h2> -->
+            <h1 class="text-center"   >Clients Dashboard</h1>
+            <hr >
+            <h3  >User Information </h3>
             <br>
             <thead>
                 <tr>
@@ -23,6 +22,7 @@
                     <th>Email</th>
                     <th>Active Account</th>
                     <th>Last Login</th>
+                    <th>Status</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
@@ -43,6 +43,7 @@
                     {% else %}
                     <td class="danger">Never</td>
                     {% endif %}
+                    <td>{{ user.userprofile.status }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -43,10 +43,11 @@ input[type="checkbox"] {
     -moz-appearance: none;
     width: 20px;
     height: 20px;
-   
+    background-color: rgb(255, 255, 255);
     border-radius: 4px;
     cursor: pointer;
     position: relative; 
+    
 }
 
 
@@ -57,6 +58,7 @@ input[type="checkbox"]::after {
     left: 6px;
     width: 5px;
     height: 10px; 
+   
     border: 2px solid var(--color-primary); 
     border-top: none;
     border-left: none;
@@ -274,12 +276,11 @@ nav .profile-area .profile {
 
 nav .profile-area .profile-photo {
     display: block;
-    width: 4rem;
-    height: 4rem;
- 
-    overflow: hidden;
-    border: 2px solid blue; /* Added blue border */
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
 }
+
 
 
 nav .profile-area button {
@@ -400,7 +401,112 @@ main section.middle .header input[type="date"]{
     color:var(--color-gray-dark);
 }
 
+/* Add this CSS to your existing style.css file */
 
+/* Adjustments for mobile devices */
+@media screen and (max-width: 768px) {
+  
+
+    .form-row {
+        margin-bottom: 15px;
+        font-size: 10px;
+    }
+
+    .input-group {
+        width: 50%;
+        font-size: 10px;
+    }
+
+    .profile-label {
+        width: 100%;
+        display: block;
+    }
+
+    .profile-input {
+        width: 100%;
+        
+    }
+
+    .profile-image {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .profile-image img {
+        max-width: 50px;
+        max-height: 50px;
+    }
+}
+
+/* Additional CSS for responsiveness */
+.input-group {
+    margin-bottom: 20px;
+}
+
+
+.permissions-content,
+.groups-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.permissions-content select,
+.groups-content select {
+    margin-bottom: 10px;
+    padding:10px;
+    border-radius: 5px;
+}
+
+.permissions-content .select-buttons,
+.groups-content .select-buttons {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.permissions-content .buttons,
+.groups-content .buttons {
+    margin-left: 10px;
+}
+
+.permissions-content .buttons button,
+.groups-content .buttons button {
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+   
+
+    .permissions-content select,
+    .groups-content select {
+        width: 100%;
+    }
+
+    .permissions-content .select-buttons,
+    .groups-content .select-buttons {
+        flex-direction: column;
+    }
+
+    .permissions-content .buttons,
+    .groups-content .buttons {
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}
+.dark-theme .permissions-content select,
+.dark-theme .groups-content select {
+    background-color: #36373f; /* Dark background color */
+    color: #ddd; /* Lighter text color */
+
+}
+
+
+
+.dark-theme .permissions-content .buttons button:hover,
+.dark-theme .groups-content .buttons button:hover {
+    background-color: #555; /* Darker background color on hover */
+    color: #ddd; /* Lighter text color on hover */
+}
 
 
 /* MEDIA QUERIES FOR TABLETS */
@@ -416,10 +522,22 @@ main section.middle .header input[type="date"]{
   
     }
     nav .profile-area button#menu-btn {
-    display: inline;
-    background: transparent;
-    color: var(--color-dark);
+        display: inline;
+        background: transparent;
+        color: var(--color-dark);
+       
     }
+    button#menu-btn {
+    position: absolute; /* Change position to absolute */
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    }
+    nav {
+        position: relative; /* Add position relative to the nav */
+    }
+    
+    
     main{
         grid-template-columns: 1fr;
     }
@@ -500,7 +618,7 @@ main section.middle .header input[type="date"]{
     margin: 10px auto; /* Center the table */
     width: 100%; /* Adjust the width as needed */
     padding-top: 30px;
-    text-align: center;
+
     
 }
 
@@ -545,7 +663,9 @@ tr:hover {
     padding-left: 250px;
 }
 
-
+.text-center{
+    text-align: center;
+}
 
 /* Link Styles */
 .links a {
@@ -569,14 +689,15 @@ tr:hover {
 /* input form */
 .table-container {
     margin: 0;
-    text-align: center;
+    
 }
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: block;
 }
 /* dropdown */
 .dropdown-content {
+    
     display: none;
     position: absolute;
     background-color: #f9f9f9;
@@ -588,7 +709,6 @@ tr:hover {
 
 .dropdown-content a {
     color: black;
-    padding: 10px 10px;
     text-decoration: none;
     display: block;
 }
@@ -599,6 +719,7 @@ tr:hover {
 
 .dropdown:hover .dropdown-content {
     display: block;
+    transition: background-color 0.3s ease;
 }
 
 
@@ -657,7 +778,7 @@ form {
 }
 
 .form-row input {
-
+font-size: 12px;
     padding: 10px;
     border-radius: 5px;
     width: 100%;
@@ -915,30 +1036,30 @@ aside.active {
 }
 
 .profile-image img {
-    width: 150px; /* Adjust the size as needed */
-    height: 150px; /* Adjust the size as needed */
- 
-    border: 2px solid #ccc; /* Optional: adds a border */
+    width: 90px; /* Adjust the size as needed */
+    height: 90px; /* Adjust the size as needed */
     animation: bounceIn 1s ease;
 }
 
 .input-group {
+   
+    margin-right: 30px;
     margin-bottom: 15px;
     animation: slideInUp 1s ease;
 }
 
 .profile-label {
     display: block;
-    margin-bottom: 5px;
+   
 }
 
 .profile-input {
     width: 100%;
     padding: 10px;
-    font-size: 16px;
+    font-size: 12px;
 
     border-radius: 5px;
-    
+    animation: slideInRight 1s ease;
 }
 
 .btn-submit {
@@ -957,56 +1078,7 @@ aside.active {
     background-color: #0056b3;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
 
-@keyframes bounceIn {
-    from {
-        transform: scale(0.5);
-    }
-    to {
-        transform: scale(1);
-    }
-}
-
-@keyframes slideInUp {
-    from {
-        transform: translateY(100px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideInRight {
-    from {
-        transform: translateX(100px);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 @media screen and (max-width: 768px) {
     .profile-container {
@@ -1021,4 +1093,628 @@ aside.active {
     }
 
    
+}
+/* Style for the dropdown container */
+.profile {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* Style for the dropdown content */
+#dropdownContent {
+    position: absolute;
+    top: calc(100% + 5px); /* Adjust the distance between the icon and dropdown */
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 8px 0;
+    min-width: 150px;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Style for the dropdown button */
+#dropdown {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Style for dropdown options */
+#dropdown option {
+    padding: 8px;
+}
+
+/* Show dropdown content on hover */
+.profile:hover #dropdownContent {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* */
+/* Input group styles */
+.input-group {
+    
+    width: calc(50% - 10px); /* Adjust as needed */
+
+}
+
+
+/* Permissions and groups content */
+.permissions-content,
+.groups-content {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Select and buttons container */
+.permissions-content .select-buttons,
+.groups-content .select-buttons {
+    display: flex;
+    margin-top: 10px;
+}
+
+/* Select styles */
+.permissions-content select,
+.groups-content select {
+    display: flex;
+    flex: 1;
+    margin-right: 10px;
+}
+
+/* Buttons styles */
+.permissions-content .buttons button,
+.groups-content .buttons button {
+    margin-right: 5px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Button hover effect */
+.permissions-content .buttons button:hover,
+.groups-content .buttons button:hover {
+    background-color: #0056b3;
+}
+
+/* Selected permissions and groups */
+select[name="selectedPermissions"],
+select[name="selectedGroups"] {
+    margin-top: 10px; /* Adjust the value as needed */
+        width: 100%;
+        padding: 5px;
+       
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+    
+
+/* Select all button */
+#selectAllAvailablePermissions,
+#selectAllAvailableGroups {
+    margin-bottom: 5px;
+}
+
+.groupcontainer {
+    display: flex; /* Use flexbox to layout child elements */
+    justify-content: space-between; /* Space the child elements evenly */
+}
+
+.groupcontainer > div {
+    width: 48%; /* Set the width of each div to occupy nearly half of the container */
+
+   
+}
+
+/* Dark theme for dropdown */
+.dark-theme .dropdown-content {
+    background-color: #36373f; /* Dark background color */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dark-theme .dropdown-content a {
+    color: #ddd; /* Lighter text color */
+}
+
+.dark-theme .dropdown-content a:hover {
+    background-color: #555; /* Darker background color on hover */
+}
+
+/* Drowdown profile */
+.dropdown-content {
+   
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    left: 100px; 
+    top: calc(97% + 0px) !important;
+    left: 0 !important;
+
+}
+
+.smaller {
+   
+    width: 40px; /* Adjust this value as needed */
+    height: 30px; /* Adjust this value as needed */
+  }
+/* Style the dropdown link */
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #000;
+}
+
+/* Style the dropdown link on hover */
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* Style the dropdown container */
+.profile {
+    position: relative;
+    display: inline-block;
+}
+
+/* Style the dropdown toggle icon */
+.dropdown-toggle {
+    cursor: pointer;
+}
+.fa {
+    font-size: 14px; /* Adjust the size as needed */
+}
+
+
+.flag-green {
+    font-size: 1.7rem;
+    color: green; /* Change to desired green color */
+}
+
+.flag-red {
+    color: red; /* Change to desired red color */
+}
+.flag-orange {
+    color: orange; /* Change to desired orange color */
+}
+
+.flag-yellow {
+    color: yellow; /* Change to desired yellow color */
+}
+
+/* Media query for screens smaller than a certain width (e.g., 768px) */
+@media only screen and (max-width: 768px) {
+    /* Hide the light mode and dark mode buttons */
+    nav .profile-area .theme-btn {
+        display: none;
+    }
+    
+    /* Hide the profile photo */
+    nav .profile-area .profile-photo {
+        display: none;
+    }
+    .profile h3 {
+        display: none;
+    }
+}
+
+/* Media query for screens larger than a certain width (e.g., 768px) */
+@media only screen and (min-width: 768px) {
+    /* Hide the profile section in desktop mode */
+    .sidebar-footer {
+        display: none;
+    }
+}
+
+/* Stilizimi i main-it */
+main {
+    padding: 20px;
+}
+
+/* Stilizimi i container-it të kartave */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Stilizimi i kartës */
+.card {
+    position: relative; /* Vendos overlay në përputhje me kartën */
+    width: calc(50% - 20px); /* Largësia e dy kartave në një rresht, me hapësirë 20px midis tyre */
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Për të fshehur effektin gradient jashtë kufijve të imazhit */
+}
+
+/* Stilizimi i përmbajtjes së kartës */
+/* Stilizimi i përmbajtjes së kartës */
+.card-content {
+    padding: 20px;
+    font-family: 'Poppins', sans-serif; /* Përdor fontin 'Poppins' */
+}
+
+/* Stilizimi i titullit të kartës */
+.card h2 {
+    margin-bottom: 10px;
+    font-size: 1.2em; /* Madhësia e titullit */
+    color: #333; /* Ngjyra e tekstit */
+}
+
+/* Stilizimi i përshkrimit të kartës */
+.card p {
+    margin-bottom: 10px;
+    font-size: 1em; /* Madhësia e përshkrimit */
+    color: #666; /* Ngjyra e tekstit */
+}
+
+/* Stilizimi i datës së postimit */
+.card p.posted-date {
+    font-size: 0.9em; /* Madhësia e datës */
+    color: #888; /* Ngjyra e tekstit */
+}
+
+/* Stilizimi i detajet-btn */
+.detajet-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #007bff; /* Ngjyra e butonit */
+    color: #fff; /* Ngjyra e tekstit */
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.detajet-btn:hover {
+    background-color: #0056b3; /* Ngjyra e butonit në hover */
+}
+
+/* Stilizimi i imazhit të kartës */
+.card img {
+   width:100px;
+   height: 100px; /* ndrysho sipas preferencave */
+    border-top-left-radius: 40px;
+    border-top-right-radius: 8px;
+   padding-top:20px;
+   padding-left:20px;
+   
+}
+
+/* Efekti overlay */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%; /* Vendos gjeresine e overlay në gjysmën e majtë të kartës */
+    height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.5), transparent); /* Gradient që përforcon tekstin mbi imazhin */
+    opacity: 0; /* Fillimisht e fsheh overlay-n */
+    transition: opacity 0.3s; /* Animacioni kur shfaqet overlay */
+}
+
+/* Stilizimi i tekstit në overlay */
+.overlay-content {
+    position: absolute;
+    top: 20px; /* Vendos distancën nga korniza e lartë e kartës */
+    left: 20px; /* Vendos distancën nga korniza e majtë e kartës */
+    color: white;
+}
+
+/* Stilizimi i linkut të kartës */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Efekti i hover-it për kartën */
+.card:hover .overlay {
+    opacity: 1; /* Kur shfaqet hover, shfaq overlay-n */
+}
+/* Dark mode styles for cards */
+.dark-theme .card {
+    background-color: #36373f; /* Dark background color */
+    color: #ddd; /* Lighter text color */
+
+}
+
+/* Dark mode styles for card content */
+.dark-theme .card-content {
+    color: #ddd; /* Lighter text color */
+}
+
+/* Dark mode styles for card titles */
+.dark-theme .card h2 {
+    color: #fff; /* White color for titles */
+}
+
+/* Dark mode styles for card descriptions */
+.dark-theme .card p {
+    color: #ccc; /* Lighter text color for descriptions */
+}
+
+/* Dark mode styles for posted date */
+.dark-theme .card p.posted-date {
+    color: #888; /* Lighter text color for posted date */
+}
+.theme-btn-mobile {
+    display: none; /* Hide by default */
+}
+
+@media only screen and (max-width: 767px) {
+    .theme-btn-mobile {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f0f0f0;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+
+
+/* job cards */
+.job-grid {
+    
+    display: grid;
+    grid-template-columns: repeat(2, minmax(150px, 1fr)); /* Two columns with minimum width of 150px */
+    grid-gap: 15px; /* Reduced gap between grid items */
+}
+
+.job-card {
+   
+    margin-bottom: 5px; /* Further reduced margin */
+    border: 1px solid #ddd;
+    border-radius: 6px; /* Slightly reduced border radius */
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: 100%; /* Full width for each card */
+    margin-right: 5px; /* Further reduced margin between cards */
+}
+
+.job-card img {
+    border-top-left-radius: 16px; /* Slightly reduced border radius */
+    border-bottom-left-radius: 16px; /* Slightly reduced border radius */
+    border-top-right-radius: 12px; /* Slightly reduced border radius */
+    border-bottom-right-radius: 12px; /* Slightly reduced border radius */
+    padding-top: 12px;
+    padding-left: 12px;
+    padding-bottom: 12px;
+    width: 120px; /* Reduced image width */
+    height: 120px; /* Reduced image height */
+    object-fit: cover;
+}
+
+.job-card-content {
+    padding: 8px; /* Further reduced padding */
+    padding-left: 12px;
+   
+}
+
+.job-card-content h2 {
+    font-size: 12px; /* Further reduced font size */
+    margin-bottom: 3px; /* Further reduced margin */
+    color: #333;
+}
+
+.job-card-content p {
+    margin-bottom: 3px; /* Further reduced margin */
+    font-size: 11px; /* Further reduced font size */
+    color: #555;
+}
+
+.job-card-content .apply-btn {
+    font-size: 10px; /* Further reduced font size */
+    padding: 5px 10px; /* Further reduced padding */
+    border-radius: 3px; /* Further reduced border radius */
+
+  
+    background-color: #007bff; /* Background color for the button */
+    color: #fff; 
+}
+
+.job-card-content .apply-btn:hover {
+    background-color: #0056b3;
+}
+
+.job-card {
+    /* Existing styles */
+    position: relative; /* Set position to relative for the parent container */
+}
+
+.new-tag {
+    position: absolute;
+    top: 0; /* Adjusted top position */
+    left: 0; /* Adjusted left position */
+    width: 4rem;
+    border-bottom: 1.2rem solid #7c0202;
+    border-left: 0.8rem solid transparent;
+    border-right: 0.8rem solid transparent;
+    background: #f10606;
+    color: #fff;
+    font-family: 'Monoton', sans-serif;
+    font-size: 0.8rem; /* Further reduced font size */
+    padding: 0.2rem; /* Further reduced padding */
+    transform: rotate(-deg);
+    z-index: 2;
+    text-align: center;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    border-top-left-radius: 0.5rem; /* Adjusted border radius for top-left corner */
+}
+
+
+
+/* Dark mode theme colors */
+.dark-theme {
+    --color-white: #131316; /* Dark background color */
+    --color-light: #23232a; /* Light background color */
+    --color-dark: #ddd; /* Dark text color */
+    --color-gray-dark: #adacb5; /* Dark gray color */
+}
+
+/* Apply dark mode theme to job cards */
+.dark-theme .job-grid {
+    background-color: var(--color-light); /* Use light background color */
+}
+
+.dark-theme .job-card {
+    border: none; /* Remove border */
+    background-color: var(--color-white); /* Use white background color */
+}
+
+.dark-theme .job-card-content h2,
+.dark-theme .job-card-content p {
+    color: var(--color-dark); /* Use dark text color */
+}
+
+.dark-theme .job-card-content .apply-btn {
+    background-color: #007bff; /* Use specific color for apply button */
+}
+
+.dark-theme .job-card-content .apply-btn:hover {
+    background-color: #0056b3; /* Use specific color for apply button hover */
+}
+
+/* Adjust other styles as needed */
+/* Footer */
+footer {
+    background-color: #ffffff;
+    color: #252525;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow content to wrap to the next line */
+    justify-content: space-between;
+}
+
+.footer-about,
+.footer-links,
+.footer-legal {
+    flex: 1 1 100%; 
+    margin-bottom: 15px; 
+}
+
+.footer-about ul,
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-about ul li,
+.footer-links ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.footer-about ul li a,
+.footer-links ul li a {
+    color: #2c2c2c;
+    text-decoration: none;
+}
+
+.footer-legal p {
+    margin: 0;
+}
+.dark-theme footer {
+    background-color: var(  --color-white);
+    color: var(--color-white); /* Light text color */
+    padding: 15px 0;
+    text-align: center;
+}
+
+.dark-theme .footer-content {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Allow content to wrap to the next line */
+    justify-content: space-between;
+}
+
+.dark-theme .footer-about,
+.dark-theme .footer-links,
+.dark-theme .footer-legal {
+    flex: 1 1 100%; /* Each section takes full width initially, then may shrink and wrap */
+    margin-bottom: 15px; /* Add some spacing between rows */
+}
+
+.dark-theme .footer-about ul,
+.dark-theme .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dark-theme .footer-about ul li,
+.dark-theme .footer-links ul li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.dark-theme .footer-about ul li a,
+.dark-theme .footer-links ul li a {
+    color: var(--color-dark); /* Light text color */
+    text-decoration: none;
+}
+
+.dark-theme .footer-legal p {
+    margin: 0;
+}
+@media (max-width: 768px) {
+    .job-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Adjusted column sizes */
+        gap: 12px; /* Reduced gap for smaller screens */
+    }
+
+    .job-card {
+        border-radius: 6px;
+    }
+
+    .job-card-content h2 {
+        font-size: 10px;
+    }
+
+    .job-card-content p {
+        font-size: 8px;
+    }
+
+    .job-card-content .apply-btn {
+        font-size: 10px;
+        padding: 5px 5px;
+    }
+
+    .footer-content {
+        flex-direction: column; /* Stack footer sections vertically */
+        align-items: center; /* Center align footer sections */
+    }
+
+    .footer-section {
+        flex: 1 1 100%; /* Each section takes full width */
+    }
 }
